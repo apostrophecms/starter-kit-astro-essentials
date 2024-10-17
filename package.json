@@ -1,0 +1,30 @@
+{
+  "name": "combined-astro-starter-kit",
+  "version": "1.0.0",
+  "description": "Combined ApostropheCMS plus Astro starter kit",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "cd astro && npm install && cd ../apostrophe && npm install",    
+    "build": "npm run frontend-build && npm run backend-build",
+    "frontend-build": "cd Astro && npm run build",
+    "backend-build": "cd apostrophe && npm run build",
+    "production-frontend-start": "cd astro && npm run serve",
+    "production-backend-start": "cd apostrophe && npm run production-start",
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apostrophecms/combined-astro-starter-kit.git"
+  },
+  "keywords": [
+    "astro",
+    "apostrophecms",
+    "apostrophe"
+  ],
+  "author": "Apostrophe Technologies Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/apostrophecms/combined-astro-starter-kit/issues"
+  },
+  "homepage": "https://github.com/apostrophecms/combined-astro-starter-kit#readme"
+}
