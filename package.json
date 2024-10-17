@@ -9,6 +9,7 @@
     "build": "npm run frontend-build && npm run backend-build && echo '\\n💡 combined build complete'",
     "frontend-build": "echo '\\n💡 running npm run build in astro/' && cd Astro && npm run build",
     "backend-build": "echo '\\n💡 running npm run build in apostrophe/' && cd apostrophe && npm run build",
+    "migrate": "cd apostrophe && npm run migrate",
     "production-frontend-start": "cd astro && npm run serve",
     "production-backend-start": "cd apostrophe && npm run production-start"
   },
