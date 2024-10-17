@@ -1,0 +1,45 @@
+---
+import dayjs from 'dayjs';
+import setParameter from '@apostrophecms/apostrophe-astro/lib/aposSetQueryParameter.js';
+
+const {
+  page,
+  user,
+  query,
+  piecesFilters,
+  pieces,
+  currentPage,
+  totalPages
+} = Astro.props.aposData;
+
+const pages = [];
+for (let i = 1; (i <= totalPages); i++) {
+  pages.push({
+    number: i,
+    current: page === currentPage,
+    url: setParameter(Astro.url, 'page', i)
+  });
+}
+---
+
+<section class="bp-content">
+  <h1>{ page.title }</h1>
+
+  <h2>Blog Posts</h2>
+
+  {pieces.map(piece => (
+    <h4>
+      Released On { dayjs(piece.publishedAt).format('MMMM D, YYYY') }
+    </h4>
+    <h3>
+      <a href={ piece._url }>{ piece.title }</a>
+    </h3>
+  ))}
+
+  {pages.map(page => (
+    <a
+      class={(page === currentPage) ? 'current' : ''} 
+      href={page.url}>{page.number}
+    </a>
+  ))}
+</section>

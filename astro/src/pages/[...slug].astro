@@ -1,0 +1,23 @@
+---
+import aposPageFetch from '@apostrophecms/apostrophe-astro/lib/aposPageFetch.js';
+import AposLayout from '@apostrophecms/apostrophe-astro/components/layouts/AposLayout.astro';
+import AposTemplate from '@apostrophecms/apostrophe-astro/components/AposTemplate.astro';
+
+const aposData = await aposPageFetch(Astro.request);
+const bodyClass = `myclass`;
+
+if (aposData.redirect) {
+  return Astro.redirect(aposData.url, aposData.status);
+}
+if (aposData.notFound) {
+  Astro.response.status = 404;
+}
+---
+<AposLayout title={aposData.page?.title} {aposData} {bodyClass}>
+    <Fragment slot="standardHead">
+      <meta name="description" content={aposData.page?.seoDescription} />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta charset="UTF-8" />
+    </Fragment>
+    <AposTemplate {aposData} slot="main"/>
+</AposLayout>

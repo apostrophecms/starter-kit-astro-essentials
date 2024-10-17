@@ -1,0 +1,45 @@
+---
+import AposArea from '@apostrophecms/apostrophe-astro/components/AposArea.astro';
+const { page, user, query } = Astro.props.aposData;
+const { main } = page;
+---
+
+<section class="bp-welcome">
+  <h1 class="bp-welcome__headline">
+    Welcome to Apostrophe 3
+  </h1>
+  { user ? '' : 
+    <div>
+      <h3 class="bp-welcome__help">First time spinning up the Apostrophe Astro combined project?</h3>
+      <p>
+        Use the credentials created during setup with the Apostrophe CLI or create a new user with this command
+        in your apostrophe project folder (not Astro):
+      </p>
+      <pre class="bp-welcome__code">
+        <span class="bp-welcome__code__context">Command Line</span>
+        <code>
+          node app @apostrophecms/user:add myUsername admin
+        </code>
+      </pre>
+      <p class="bp-welcome__cta">
+        <a class="bp-button bp-button--cta" href="/login">Then log in here.</a>
+      </p>
+    </div>
+
+  }
+  <p>
+    For a guide on how to configure and customize this project, <a href="https://github.com/apostrophecms/apostrophe-astro">please check out the apostrophe-astro documentation</a>.
+  </p>
+  <div class="bp-welcome__area">
+    { (user && !query?.['apos-edit']) ?
+      <p>
+        Enter <span class="bp-mode">Edit</span> mode from the admin bar <span style="display:inline-block; transform: rotate(45deg)">👆</span> to begin.
+      </p>
+    :
+      <p>
+        Add and edit content below in the content area. 👇
+      </p>
+    }
+    <AposArea area={main} />
+  </div>
+</section>

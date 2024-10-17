@@ -1,0 +1,20 @@
+---
+const { widget, options } = Astro.props;
+import AposArea from '@apostrophecms/apostrophe-astro/components/AposArea.astro';
+---
+<style>
+  .two-column-widget {
+    display: flex;
+  }
+  .two-column-widget-column {
+    flex: 50%;
+  }
+</style>
+<div class="two-column-widget">
+  <div class="two-column-widget-column">
+    <AposArea area={widget.left} />
+  </div>
+  <div class="two-column-widget-column">
+    <AposArea area={widget.right} />
+  </div>
+</div>
