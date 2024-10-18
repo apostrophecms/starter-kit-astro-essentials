@@ -9,7 +9,7 @@
     "build": "npm run frontend-build && npm run backend-build && echo '\\n💡 combined build complete'",
     "build-frontend": "echo '\\n💡 running npm run build in frontend/' && cd backend && npm run build",
     "build-backend": "echo '\\n💡 running npm run build in backend/' && cd backend && npm run build",
-    "migrate": "cd apostrophe && npm run migrate",
+    "migrate": "cd backend && npm run migrate",
     "serve-frontend": "cd frontend && npm run serve",
     "serve-backend": "cd backend && npm run production-start"
   },
