@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "cd astro && echo '\\n💡 running npm install in astro/' && npm install && cd ../apostrophe && echo '\\n💡 running npm install in apostrophe/' && npm install && echo '\\n💡 combined npm install complete'",    
+    "postinstall": "cd frontend && echo '\\n💡 running npm install in frontend/' && npm install && cd ../backend && echo '\\n💡 running npm install in backend/' && npm install && echo '\\n💡 combined npm install complete'",    
     "build": "npm run frontend-build && npm run backend-build && echo '\\n💡 combined build complete'",
-    "frontend-build": "echo '\\n💡 running npm run build in astro/' && cd Astro && npm run build",
-    "backend-build": "echo '\\n💡 running npm run build in apostrophe/' && cd apostrophe && npm run build",
+    "build-frontend": "echo '\\n💡 running npm run build in frontend/' && cd backend && npm run build",
+    "build-backend": "echo '\\n💡 running npm run build in backend/' && cd backend && npm run build",
     "migrate": "cd apostrophe && npm run migrate",
-    "production-frontend-start": "cd astro && npm run serve",
-    "production-backend-start": "cd apostrophe && npm run production-start"
+    "serve-frontend": "cd frontend && npm run serve",
+    "serve-backend": "cd backend && npm run production-start"
   },
   "repository": {
     "type": "git",
