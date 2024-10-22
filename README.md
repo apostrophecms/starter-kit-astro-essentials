@@ -8,6 +8,10 @@ This single-repository approach allows the project to be deployed via our hostin
 
 The provided `postinstall` script takes care of recursively running `npm install` for both `apostrophe` and `astro` when you run it at the top level. This is handy in both development and production.
 
+## `npm run update` in one step
+
+For convenience you can also run `npm run update` (NOTE: you must type the `run` part as npm has no `postupdate` hook for this). Just `npm update` won't work at the top level.
+
 ## Building for production
 
 The provided `build` script covers production builds for both Astro and Apostrophe. You shouldn't need this in a development environment (see below).
