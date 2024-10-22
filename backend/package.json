@@ -9,7 +9,7 @@
     "build": "NODE_ENV=production node app @apostrophecms/asset:build",
     "serve": "NODE_ENV=production node app",
     "release": "npm install && npm run build && npm run migrate",
-    "migrate": "node app @apostrophecms/migration:migrate"
+    "migrate": "NODE_ENV=production node app @apostrophecms/migration:migrate"
   },
   "nodemonConfig": {
     "delay": 1000,
