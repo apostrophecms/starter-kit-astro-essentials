@@ -11,10 +11,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@apostrophecms/apostrophe-astro": "apostrophecms/apostrophe-astro#fix-connection-header",
+    "@apostrophecms/apostrophe-astro": "^1.1.0",
     "@astrojs/node": "^8.3.4",
     "astro": "^4.0.0",
-    "vite": "^5.0.7",
-    "dayjs": "^1.11.10"
+    "dayjs": "^1.11.10",
+    "vite": "^5.0.7"
   }
 }
