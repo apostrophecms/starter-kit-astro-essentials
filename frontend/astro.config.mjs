@@ -17,8 +17,9 @@ export default defineConfig({
         'strict-transport-security', 
         'x-frame-options',
         'referrer-policy',
-        'cache-control',
-        'host'
+        'cache-control'
+        // Should only be passed in multisite projects, and only if Apostrophe and Astro are hosted together
+        // 'host'
       ]
     })
   ],
