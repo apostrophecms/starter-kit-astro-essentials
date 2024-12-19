@@ -32,11 +32,11 @@ A combined `dev` script (e.g. `npm run dev`) is not provided because it is truly
 
 ```bash
 # In terminal window 1
-cd apostrophe
+cd backend
 npm run dev
 
 # In terminal window 2
-cd astro
+cd frontend
 npm run dev
 ```
 
