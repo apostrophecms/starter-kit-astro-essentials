@@ -13,13 +13,12 @@ export default defineConfig({
       widgetsMapping: './src/widgets',
       templatesMapping: './src/templates',
       forwardHeaders: [
-        'content-security-policy', 
-        'strict-transport-security', 
+        'content-security-policy',
+        'strict-transport-security',
         'x-frame-options',
         'referrer-policy',
-        'cache-control',
-        'host'
-      ]
+        'cache-control'
+      ],
     })
   ],
   vite: {
