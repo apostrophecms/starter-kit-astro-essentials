@@ -18,7 +18,9 @@ export default defineConfig({
         'x-frame-options',
         'referrer-policy',
         'cache-control'
-      ],
+        // Should only be passed in multisite projects, and only if Apostrophe and Astro are hosted together
+        'host'
+      ]
     })
   ],
   vite: {
