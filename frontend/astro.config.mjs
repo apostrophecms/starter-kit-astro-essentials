@@ -12,7 +12,7 @@ export default defineConfig({
       aposHost: 'http://localhost:3000',
       widgetsMapping: './src/widgets',
       templatesMapping: './src/templates',
-      forwardHeaders: [
+      includeResponseHeaders: [
         'content-security-policy',
         'strict-transport-security',
         'x-frame-options',
