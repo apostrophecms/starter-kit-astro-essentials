@@ -12,13 +12,15 @@ export default defineConfig({
       aposHost: 'http://localhost:3000',
       widgetsMapping: './src/widgets',
       templatesMapping: './src/templates',
-      forwardHeaders: [
-        'content-security-policy', 
-        'strict-transport-security', 
+      includeResponseHeaders: [
+        'content-security-policy',
+        'strict-transport-security',
         'x-frame-options',
         'referrer-policy',
         'cache-control'
-        // Should only be passed in multisite projects, and only if Apostrophe and Astro are hosted together
+      ],
+      excludeRequestHeaders: [
+        // Must exclude this for separate apostrophe and astro hosting to work
         // 'host'
       ]
     })
