@@ -42,7 +42,7 @@
   "license": "MIT",
   "dependencies": {
     "@apostrophecms/blog": "^1.0.4",
-    "apostrophe": "^4.0.0",
+    "apostrophe": "apostrophecms/apostrophe#widget-live-preview",
     "normalize.css": "^8.0.1"
   },
   "devDependencies": {
