@@ -20,6 +20,6 @@ const altText = widget?._image[0]?.alt || '';
 <img
   class="img-widget"
   {src}
-  {...sliderWidth > 0 ? { style: `width: ${sliderWidth}%;` } : {}}
-  {...altText ? { alt: altText } : {}}
+  {...(sliderWidth > 0 ? { style: `width: ${sliderWidth}%;` } : {})}
+  {...(altText ? { alt: altText } : {})}
 />
