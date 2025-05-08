@@ -7,10 +7,19 @@ const placeholder = widget?.aposPlaceholder;
 const src = placeholder ?
   placeholderImg.src :
   widget?._image[0]?.attachment?._urls['full'];
+
+const sliderWidth = widget?.width || 0;
+
+const altText = widget?._image[0]?.alt || '';
 ---
 <style>
   .img-widget {
     width: 100%;
   }
 </style>
-<img class="img-widget" {src} />
+<img
+  class="img-widget"
+  {src}
+  {...sliderWidth > 0 ? { style: `width: ${sliderWidth}%;` } : {}}
+  {...altText ? { alt: altText } : {}}
+/>
