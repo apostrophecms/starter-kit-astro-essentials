@@ -1,0 +1,28 @@
+---
+const { image, link } = Astro.props;
+
+export interface Props {
+  image: {
+    src: string;
+    alt?: string | null;
+    style?: string | null;
+  };
+  link?: {
+    url: string;
+    title?: string | null;
+    target?: string | null;
+    rel?: string | null;
+  };
+}
+---
+
+<Fragment>
+  {!link && <img class={image.style} src={image.src} alt={image.alt} />}
+  {
+    link && (
+      <a href={link.url} title={link.title} target={link.target} rel={link.rel}>
+        <img class={image.style} src={image.src} alt={image.alt} />
+      </a>
+    )
+  }
+</Fragment>

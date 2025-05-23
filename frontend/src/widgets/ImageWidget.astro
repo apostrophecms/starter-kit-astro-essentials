@@ -1,16 +1,46 @@
 ---
-import placeholderImg from '../../public/images/image-widget-placeholder.jpg';
+import sluggo from "sluggo";
+import placeholderImg from "../../public/images/image-widget-placeholder.jpg";
+import Figure from "../components/Figure.astro";
 
-const { widget } = Astro.props;
+const { widget = {} } = Astro.props;
 const placeholder = widget?.aposPlaceholder;
 
-const src = placeholder ?
-  placeholderImg.src :
-  widget?._image[0]?.attachment?._urls['full'];
----
-<style>
-  .img-widget {
-    width: 100%;
+const src = placeholder
+  ? placeholderImg.src
+  : widget._image[0]?.attachment?._urls["full"];
+
+let link = {
+  url: widget.linkHref,
+  title: widget.linkHrefTitle || widget.caption,
+  target: widget.linkTarget,
+  rel: null,
+};
+const image = {
+  src,
+  alt: widget._image[0]?.attachment?._alt,
+  style: "img-widget__image",
+};
+let style = "img-widget";
+
+switch (widget.linkTo) {
+  case "none": {
+    link = null;
+    break;
   }
-</style>
-<img class="img-widget" {src} />
+  case "_url": {
+    link.rel = widget.target === "_blank" ? "noopener noreferrer" : null;
+    break;
+  }
+  default: {
+    // slugify the linkTo value to reference the widget field.
+    const name = "_" + sluggo(widget.linkTo);
+    const item = widget[name]?.[0];
+    link.url = item?._url;
+    link.title = widget.linkTitle || item?.title;
+    break;
+  }
+}
+---
+
+<Figure {image} {link} caption={widget.caption} {style} />
