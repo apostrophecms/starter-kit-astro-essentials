@@ -1,14 +1,27 @@
 ---
-import sluggo from "sluggo";
+import {
+  getAttachmentUrl,
+  getAttachmentSrcset,
+  getFocalPoint,
+  getWidth,
+  getHeight,
+} from "@apostrophecms/apostrophe-astro/lib/attachment.js";
+import { slugify } from "@apostrophecms/apostrophe-astro/lib/util.js";
 import placeholderImg from "../../public/images/image-widget-placeholder.jpg";
 import Figure from "../components/Figure.astro";
 
 const { widget = {} } = Astro.props;
 const placeholder = widget?.aposPlaceholder;
+const imageObj = widget?._image?.[0];
 
-const src = placeholder
-  ? placeholderImg.src
-  : widget._image[0]?.attachment?._urls["full"];
+const src = placeholder ? placeholderImg.src : getAttachmentUrl(imageObj);
+
+const srcset = placeholder ? "" : getAttachmentSrcset(imageObj);
+const objectPosition = placeholder ? "center center" : getFocalPoint(imageObj);
+// Only add width/height if they exist to prevent layout shift
+const width = imageObj ? getWidth(imageObj) : undefined;
+const height = imageObj ? getHeight(imageObj) : undefined;
+const aspectRatio = width && height ? `${width}/${height}` : undefined;
 
 let link = {
   url: widget.linkHref,
@@ -18,8 +31,13 @@ let link = {
 };
 const image = {
   src,
-  alt: widget._image[0]?.attachment?._alt,
+  alt: imageObj?.alt || imageObj?.attachment?._alt || "",
   style: "img-widget__image",
+  srcset,
+  objectPosition,
+  width,
+  height,
+  aspectRatio,
 };
 let style = "img-widget";
 
@@ -34,7 +52,7 @@ switch (widget.linkTo) {
   }
   default: {
     // slugify the linkTo value to reference the widget field.
-    const name = "_" + sluggo(widget.linkTo);
+    const name = "_" + slugify(widget.linkTo);
     const item = widget[name]?.[0];
     link.url = item?._url;
     link.title = widget.linkTitle || item?.title;
