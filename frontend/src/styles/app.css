@@ -1,0 +1,13 @@
+  /* Image Widget */
+  .img-widget {
+    margin: 0;
+    width: 100%;
+  }
+  .img-widget img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: var(--aspect-ratio, auto);
+  }
+  

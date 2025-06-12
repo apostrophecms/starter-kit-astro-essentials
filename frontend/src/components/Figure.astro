@@ -1,0 +1,31 @@
+---
+import ImageLink from "./ImageLink.astro";
+
+export interface Props {
+  image: {
+    src: string;
+    alt?: string | null;
+    style?: string | null;
+    srcset?: string;
+    objectPosition: string;
+    width?: number | string;
+    height?: number | string;
+    aspectRatio?: string;
+  };
+  caption?: string;
+  link?: {
+    url: string;
+    title?: string | null;
+    target?: string | null;
+    rel?: string | null;
+  };
+  style?: string | null;
+}
+
+const { image, caption, link, style } = Astro.props;
+---
+
+<figure class={style}>
+  <ImageLink image={image} link={link} />
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
