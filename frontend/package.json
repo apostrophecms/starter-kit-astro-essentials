@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "APOS_EXTERNAL_FRONT_KEY=dev astro dev",
     "start": "astro dev",
     "build": "astro build",
     "serve": "HOST=0.0.0.0 PORT=4321 node ./dist/server/entry.mjs",
@@ -11,7 +11,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@apostrophecms/apostrophe-astro": "^1.2.0",
+    "@apostrophecms/apostrophe-astro": "^1.4.0",
     "@astrojs/node": "^8.3.4",
     "astro": "^4.0.0",
     "dayjs": "^1.11.10",
