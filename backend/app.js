@@ -1,4 +1,7 @@
-require('apostrophe')({
+import apostrophe from 'apostrophe';
+
+apostrophe({
+  root: import.meta,
   shortName: 'starter-kit-astro',
   bundles: [ '@apostrophecms/blog' ],
   modules: {
