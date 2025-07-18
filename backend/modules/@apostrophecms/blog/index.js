@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   fields: {
     add: {
       main: {
@@ -47,6 +47,6 @@ module.exports = {
       basics: {
         fields: [ 'title', 'publishedAt', 'main' ]
       }
-    }  
+    } 
   }
 };

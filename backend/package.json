@@ -36,12 +36,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/apostrophecms/starter-kit-astro"
+    "url": "https://github.com/apostrophecms/combined-astro-starter-kit"
   },
   "author": "Apostrophe Technologies, Inc.",
   "license": "MIT",
   "dependencies": {
     "@apostrophecms/blog": "^1.0.4",
+    "@apostrophecms/vite": "^1.1.0",
     "apostrophe": "^4.0.0",
     "normalize.css": "^8.0.1"
   },
