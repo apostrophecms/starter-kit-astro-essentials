@@ -50,7 +50,7 @@ This is a **minimal, non-opinionated foundation** that demonstrates the Apostrop
 - 🏎️ **Blazing Fast**: Astro's server-side rendering + smart hydration = incredible Core Web Vitals scores
 - 🛠️ **Modern DX**: Write components in React, Vue, Svelte, or vanilla JS—your choice
 - 🔧 **Zero API Boilerplate**: The `apostrophe-astro` package handles all the backend communication automatically
-- 📡 **Flexible Deployment**: SSR hosting on Netlify, Vercel, Cloudflare, or any Node.js environment
+- 🚀 **Seamless Hosting**: Deploy your combined ApostropheCMS + Astro project with [ApostropheCMS hosting](https://apostrophecms.com/hosting) for zero-config deployment, or choose from flexible alternatives like Netlify, Vercel, and Cloudflare
 
 **For Content Teams:**
 - ✏️ **True WYSIWYG**: Edit content directly on the live site with ApostropheCMS's in-context editing
@@ -101,7 +101,7 @@ Both projects need an `APOS_EXTERNAL_FRONT_KEY` environment variable set to the 
    export APOS_EXTERNAL_FRONT_KEY=my-secret-key
    ```
 
-   The `astro.config.mjs` file uses default values, but if running the backend on a different port, also set:
+   The `astro.config.mjs` file uses default values, but if running the backend on a different port and/or a different server, also set:
    ```bash
    export APOS_HOST=your-backend-url
    ```
@@ -156,7 +156,7 @@ If you've worked with ApostropheCMS previously, the backend should look familiar
 - Most [module configuration settings](https://docs.apostrophecms.org/reference/module-api/module-overview.html#module-configuration) for Admin UI, request routing, and MongoDB interaction
 
 **Key differences:**
-- **No frontend code in modules** - Client-side JavaScript, styling, and templates go in the Astro project instead
+- **No frontend code in modules** - Stylesheets, templates (implemented as Astro components), and client-side JavaScript go in the Astro project instead
 - **No template helpers** - Skip `helper()`, `extendHelpers()`, `components()`, and `renderRoutes()` functions
 
 The `modules/@apostrophecms/home-page` module loads the core `views/layout.html` file, which has been modified to indicate that editing should take place in the Astro frontend.
@@ -332,7 +332,7 @@ Apostrophe hosting comes with zero-config deployment with automatic:
 - Security updates and monitoring
 - combined logs of both services via our hosting CLI
 
-*[Contact us](https://apostrophecms.com/contact-us) for enterprise hosting.*
+*Learn more about [ApostropheCMS hosting](https://apostrophecms.com/hosting) or [contact us](https://apostrophecms.com/contact-us) for enterprise hosting.*
 
 ### **DIY Deployment**
 Since this project uses Astro in server mode (SSR), deployment requires careful consideration:
