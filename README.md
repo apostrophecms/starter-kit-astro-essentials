@@ -4,6 +4,35 @@
 
 This powerful combination gives you Astro's incredible performance and developer experience, plus ApostropheCMS's intuitive in-context editing and content management capabilities. No more choosing between speed and usability—get both.
 
+- [ApostropheCMS + Astro Essentials Starter Kit:](#apostrophecms--astro-essentials-starter-kit)
+  - [🎯 What This Starter Provides](#-what-this-starter-provides)
+  - [✨ Why Use This Combination](#-why-use-this-combination)
+  - [🎯 What Makes This Special](#-what-makes-this-special)
+  - [🚀 Quick Start](#-quick-start)
+    - [Prerequisites](#prerequisites)
+    - [Get Running in Minutes](#get-running-in-minutes)
+  - [🏗️ Architecture Overview](#️-architecture-overview)
+    - [How It Works](#how-it-works)
+    - [Project Structure](#project-structure)
+    - [For ApostropheCMS Developers](#for-apostrophecms-developers)
+    - [For Astro Developers](#for-astro-developers)
+  - [🖼️ Image Helper Functions](#️-image-helper-functions)
+    - [Overview](#overview)
+    - [Working with Image Relationships](#working-with-image-relationships)
+    - [Working with Direct Attachments](#working-with-direct-attachments)
+    - [Image Cropping and Sizes](#image-cropping-and-sizes)
+    - [Working with Focal Points](#working-with-focal-points)
+    - [Core Functions Reference](#core-functions-reference)
+  - [🚀 Deployment Options](#-deployment-options)
+    - [**ApostropheCMS Hosting** (Recommended)](#apostrophecms-hosting-recommended)
+    - [**DIY Deployment**](#diy-deployment)
+      - [Backend (ApostropheCMS) Deployment](#backend-apostrophecms-deployment)
+      - [Frontend (Astro) Deployment](#frontend-astro-deployment)
+      - [Netlify Deployment Example](#netlify-deployment-example)
+  - [📚 Learn More](#-learn-more)
+  - [🎯 Ready to Build Something Amazing?](#-ready-to-build-something-amazing)
+
+
 ## 🎯 What This Starter Provides
 
 This is a **minimal, non-opinionated foundation** that demonstrates the ApostropheCMS + Astro integration without imposing design decisions on your project. You get the essential building blocks:
@@ -48,7 +77,7 @@ Unlike typical headless setups where content editors work in separate admin pane
 ### Prerequisites
 - Node.js v22 or later
 - MongoDB v6.0 or later ([setup guide](https://docs.apostrophecms.org/guide/development-setup.html))
-- Windows users: [WSL2 required](https://learn.microsoft.com/en-us/windows/wsl/install)
+- Windows users: [WSL2 required](https://docs.apostrophecms.org/cookbook/windows-development.html)
 
 ### Get Running in Minutes
 
@@ -57,11 +86,11 @@ The codebases located in the `backend` and `frontend` folders should be treated 
 To simplify dependency management, this repository includes several root-level scripts for convenience. The `postinstall` script automatically installs dependencies for both the `frontend` and `backend` folders when you run `npm install` at the root.
 
 1. **Clone the repo and install dependencies**
-```bash
-git clone https://github.com/apostrophecms/combined-astro-starter-kit.git
-cd combined-astro-example
-npm install
-```
+   ```bash
+   git clone https://github.com/apostrophecms/combined-astro-starter-kit.git
+   cd combined-astro-example
+   npm install
+   ```
 2. **Set up environment variables**
 Both projects need an `APOS_EXTERNAL_FRONT_KEY` environment variable set to the same value for authentication. Open two terminals:
    - **Mac/Linux users**: One terminal in `frontend` folder, one in `backend` folder
@@ -101,11 +130,11 @@ This project utilizes ApostropheCMS as a headless backend with Astro as a fronte
 
 ### Project Structure
 ```
-├── backend/                 # ApostropheCMS application
-│   ├── modules/            # Custom modules (pages, pieces, widgets)
+├── backend/               # ApostropheCMS application
+│   ├── modules/           # Custom modules (pages, pieces, widgets)
 │   ├── app.js             # Main configuration
 │   └── ...
-├── frontend/               # Astro application  
+├── frontend/              # Astro application
 │   ├── src/
 │   │   ├── pages/         # Single [...slug].astro route
 │   │   ├── templates/     # Page templates
@@ -119,7 +148,7 @@ This project utilizes ApostropheCMS as a headless backend with Astro as a fronte
 
 ### For ApostropheCMS Developers
 
-If you've worked with ApostropheCMS previously, the backend should look familiar. Custom modules for pages, pieces, and widgets are in the `modules` folder, with core module configuration in `modules/@apostrophecms`. 
+If you've worked with ApostropheCMS previously, the backend should look familiar. Custom modules for pages, pieces, and widgets are in the `modules` folder, with core module configuration in `modules/@apostrophecms`.
 
 **What stays the same:**
 - Module registration in `app.js`
@@ -129,9 +158,8 @@ If you've worked with ApostropheCMS previously, the backend should look familiar
 **Key differences:**
 - **No frontend code in modules** - Client-side JavaScript, styling, and templates go in the Astro project instead
 - **No template helpers** - Skip `helper()`, `extendHelpers()`, `components()`, and `renderRoutes()` functions
-- **Schema sharing** - Some widget schemas have been moved to `lib/schema-mixins` for reuse between widgets and pages
 
-The `modules/@apostrophecms/home-page` module loads the core `views/layout.html` file, which has been modified to show project status information instead of the Admin UI.
+The `modules/@apostrophecms/home-page` module loads the core `views/layout.html` file, which has been modified to indicate that editing should take place in the Astro frontend.
 
 ### For Astro Developers
 
@@ -144,25 +172,15 @@ The Astro portion follows standard conventions with components in `src` and asse
 
 **Key differences:**
 - **Single route system** - Instead of multiple routes in `pages`, there's one `[...slug].astro` file that handles all routing
-- **Template mapping** - Pages map to templates in the `templates` folder, corresponding to ApostropheCMS page types
-- **Widget system** - The `widgets` folder contains templates for ApostropheCMS widgets, mapped through `index.js` files
+- **Template mapping** - Pages map to templates in the `templates` folder, mapped by the `index.js` file in that folder. Each template corresponds to an ApostropheCMS page type, including `index.html` and `show.html` piece-page types
+- **Widget system** - The `widgets` folder contains templates for ApostropheCMS widgets, mapped through an `index.js` file in that folder.
 - **Required configuration** - The `apostrophe` integration and `output: 'server'` settings must remain for backend integration
 
-### Routing and Templates
+Content is populated by data from the CMS backend and inserted into slots in the main `[...slug].astro` file. Widget data is handled through the mapped templates and added to page templates using the `AposArea` helper component.
 
-Unlike typical Astro projects with multiple route files, this project uses a single `[...slug].astro` route that:
+Read more in the [`apostrophe-astro` documentation](https://github.com/apostrophecms/apostrophe-astro)  or in the [Apollo tutorial series](https://docs.apostrophecms.org/tutorials/astro/apostrophecms-and-astro.html).
 
-1. Handles all URL routing using pages from the CMS backend
-2. Maps page types to corresponding templates in the `templates` folder
-3. Populates template content with data from the CMS
-4. Renders widgets using templates from the `widgets` folder
-
-Each template corresponds to a registered ApostropheCMS page or piece-page type. Content is populated by data from the CMS backend and inserted into slots in the main `[...slug].astro` file.
-
-Read more in the [`apostrophe-astro` documentation](https://github.com/apostrophecms/apostrophe-astro).
 ---
-
-## 🌟 Key Features
 
 ## 🖼️ Image Helper Functions
 
@@ -312,7 +330,6 @@ Apostrophe hosting comes with zero-config deployment with automatic:
 - SSL certificates
 - Asset optimization and delivery
 - Security updates and monitoring
-- 24/7 support with Pro plans
 - combined logs of both services via our hosting CLI
 
 *[Contact us](https://apostrophecms.com/contact-us) for enterprise hosting.*
@@ -374,45 +391,12 @@ The build settings can also be supplied through a `netlify.toml` file at the roo
 
 ---
 
-## 💼 Good Fit For
-
-- **Content-focused websites** that need regular updates
-- **Marketing sites** with multiple content contributors  
-- **Projects requiring workflows** and user management
-- **Developers** who want modern tooling with editor-friendly CMS
-- **Teams** seeking a foundation to build upon rather than a pre-built theme
-
----
-
-## 🔧 Development Workflow
-
-The beauty of this setup is how smooth the development experience is:
-
-1. **Define Your Content Types** in ApostropheCMS modules
-2. **Build Components** in Astro using your preferred framework  
-3. **Map Templates** to content types automatically
-4. **Style & Deploy** with full confidence in performance
-
-### **Differences from Standard Astro**
-- **Server Mode Required**: Uses `output: 'server'` for server-side rendering (not static generation)
-- Single `[...slug].astro` route handles all pages
-- Content comes from ApostropheCMS instead of markdown files
-- Templates in `/templates` folder map to CMS page types
-- Widgets in `/widgets` folder for reusable content blocks
-- **Deployment**: Requires SSR-capable hosting (not basic static hosting)
-
-### **Differences from Standard ApostropheCMS**
-- No Nunjucks templates (use Astro components instead)
-- Frontend code lives in Astro project
-- Focus on API and admin experience in backend
-
----
-
 ## 📚 Learn More
 
 - **[ApostropheCMS Documentation](https://docs.apostrophecms.org/)** - Complete CMS guide
 - **[Astro Documentation](https://docs.astro.build/)** - Static site generator docs
 - **[Astro + ApostropheCMS Guide](https://docs.astro.build/en/guides/cms/apostrophecms/)** - Integration details
+- **[Building a Site Tutorial](https://docs.apostrophecms.org/tutorials/astro/apostrophecms-and-astro.html)** - Building a complete site with the Apollo theme
 - **[apostrophe-astro Package](https://github.com/apostrophecms/apostrophe-astro)** - Bridge package docs
 
 ---
@@ -429,7 +413,7 @@ This starter kit includes the essentials to get you building:
 
 **A clean foundation** for your project, not a finished product. Perfect for developers who want to start with solid architecture and build their vision on top.
 
-*Need advanced features like e-commerce, advanced workflows, or premium support? [Explore ApostropheCMS Pro](https://apostrophecms.com/pro) for enterprise-grade capabilities.*
+*Need advanced features like granular permissions, advanced workflows, or premium support? [Explore ApostropheCMS Pro](https://apostrophecms.com/pro) for enterprise-grade capabilities.*
 
 ---
 
