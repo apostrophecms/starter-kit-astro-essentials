@@ -29,6 +29,7 @@ This powerful combination gives you Astro's incredible performance and developer
       - [Backend (ApostropheCMS) Deployment](#backend-apostrophecms-deployment)
       - [Frontend (Astro) Deployment](#frontend-astro-deployment)
       - [Netlify Deployment Example](#netlify-deployment-example)
+  - [� Need Help?](#-need-help)
   - [📚 Learn More](#-learn-more)
   - [🎯 Ready to Build Something Amazing?](#-ready-to-build-something-amazing)
 
@@ -391,10 +392,18 @@ The build settings can also be supplied through a `netlify.toml` file at the roo
 
 ---
 
+## 🚑 Need Help?
+
+- **Community Support**: Join our [Discord community](https://discord.com/invite/HwntQpADJr) for help from other developers
+- **Professional Support**: Dedicated support packages are available - [Contact us](https://apostrophecms.com/contact-us) to learn more
+- **Training**: Professional training and consultation services available
+
+---
+
 ## 📚 Learn More
 
 - **[ApostropheCMS Documentation](https://docs.apostrophecms.org/)** - Complete CMS guide
-- **[Astro Documentation](https://docs.astro.build/)** - Static site generator docs
+- **[Astro Documentation](https://docs.astro.build/)** - Learn more about Astro
 - **[Astro + ApostropheCMS Guide](https://docs.astro.build/en/guides/cms/apostrophecms/)** - Integration details
 - **[Building a Site Tutorial](https://docs.apostrophecms.org/tutorials/astro/apostrophecms-and-astro.html)** - Building a complete site with the Apollo theme
 - **[apostrophe-astro Package](https://github.com/apostrophecms/apostrophe-astro)** - Bridge package docs
