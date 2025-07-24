@@ -4,7 +4,38 @@
 
 This powerful combination gives you Astro's incredible performance and developer experience, plus ApostropheCMS's intuitive in-context editing and content management capabilities. No more choosing between speed and usability—get both.
 
+## ApostropheCMS + Astro Starter Kits
+
+**Choose the right foundation for your project:**
+
+## 🎯 Combined Astro Starter Kit (This Repository)
+**Perfect if you want:** A clean, minimal foundation to build your own design system
+
+- **Minimal & Non-opinionated**: Essential building blocks without imposed design decisions
+- **Core Components**: Basic page types, essential widgets, and clean architecture  
+- **Maximum Flexibility**: Build your own styling approach and component library
+- **Learning Focus**: Understand the ApostropheCMS + Astro integration from the ground up
+- **Best for**: Developers who want full creative control and custom design systems
+
+## 🌟 Apollo Theme
+**Perfect if you want:** A production-ready foundation with beautiful design included
+
+- **Production-Ready Design**: Complete Bulma-based design system with modern styling
+- **Rich Feature Set**: Advanced widgets, layouts, and pre-styled components
+- **Faster Time-to-Market**: Launch professional sites with minimal additional styling
+- **Content-Rich Sites**: Built-in blog, author relationships, and content management features
+- **Best for**: Teams who want to focus on content and functionality over design from scratch
+
+---
+
+**Still deciding?** Both use the same powerful ApostropheCMS + Astro architecture. You can always start with the Combined Starter Kit and add features, or begin with Apollo and customize the design to match your brand.
+
+**Ready for enterprise features?** [Contact us about Apollo Pro](https://apostrophecms.com/contact-us) for advanced permissions, automated translations, SEO optimization, and more professional capabilities.
+
 - [ApostropheCMS + Astro Essentials Starter Kit:](#apostrophecms--astro-essentials-starter-kit)
+  - [ApostropheCMS + Astro Starter Kits](#apostrophecms--astro-starter-kits)
+  - [🎯 Combined Astro Starter Kit (This Repository)](#-combined-astro-starter-kit-this-repository)
+  - [🌟 Apollo Theme](#-apollo-theme)
   - [🎯 What This Starter Provides](#-what-this-starter-provides)
   - [✨ Why Use This Combination](#-why-use-this-combination)
   - [🎯 What Makes This Special](#-what-makes-this-special)
@@ -29,7 +60,7 @@ This powerful combination gives you Astro's incredible performance and developer
       - [Backend (ApostropheCMS) Deployment](#backend-apostrophecms-deployment)
       - [Frontend (Astro) Deployment](#frontend-astro-deployment)
       - [Netlify Deployment Example](#netlify-deployment-example)
-  - [� Need Help?](#-need-help)
+  - [🚑 Need Help?](#-need-help)
   - [📚 Learn More](#-learn-more)
   - [🎯 Ready to Build Something Amazing?](#-ready-to-build-something-amazing)
 
