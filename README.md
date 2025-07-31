@@ -8,7 +8,7 @@ This powerful combination gives you Astro's incredible performance and developer
 
 **Choose the right foundation for your project:**
 
-## 🎯 Combined Astro Starter Kit (This Repository)
+## 🎯 Astro Essentials Starter Kit (This Repository)
 **Perfect if you want:** A clean, minimal foundation to build your own design system
 
 - **Minimal & Non-opinionated**: Essential building blocks without imposed design decisions
@@ -28,13 +28,13 @@ This powerful combination gives you Astro's incredible performance and developer
 
 ---
 
-**Still deciding?** Both use the same powerful ApostropheCMS + Astro architecture. You can always start with the Combined Starter Kit and add features, or begin with [Apollo](https://github.com/apostrophecms/apollo) and customize the design to match your brand.
+**Still deciding?** Both use the same powerful ApostropheCMS + Astro architecture. You can always start with the Essentials Starter Kit and add features, or begin with [Apollo](https://github.com/apostrophecms/apollo) and customize the design to match your brand.
 
 **Ready for enterprise features?** [Contact us about Apollo Pro](https://apostrophecms.com/contact-us) for advanced permissions, automated translations, SEO optimization, and more professional capabilities.
 
 - [ApostropheCMS + Astro Essentials Starter Kit:](#apostrophecms--astro-essentials-starter-kit)
   - [ApostropheCMS + Astro Starter Kits](#apostrophecms--astro-starter-kits)
-  - [🎯 Combined Astro Starter Kit (This Repository)](#-combined-astro-starter-kit-this-repository)
+  - [🎯 Astro Essentials Starter Kit (This Repository)](#-astro-essentials-starter-kit-this-repository)
   - [🌟 Apollo Starter Kit](#-apollo-starter-kit)
   - [🎯 What This Starter Provides](#-what-this-starter-provides)
   - [✨ Why Use This Combination](#-why-use-this-combination)
@@ -82,7 +82,7 @@ This is a **minimal, non-opinionated foundation** that demonstrates the Apostrop
 - 🏎️ **Blazing Fast**: Astro's server-side rendering + smart hydration = incredible Core Web Vitals scores
 - 🛠️ **Modern DX**: Write components in React, Vue, Svelte, or vanilla JS—your choice
 - 🔧 **Zero API Boilerplate**: The `apostrophe-astro` package handles all the backend communication automatically
-- 🚀 **Seamless Hosting**: Deploy your combined ApostropheCMS + Astro project with [ApostropheCMS hosting](https://apostrophecms.com/hosting) for zero-config deployment, or choose from flexible alternatives like Netlify, Vercel, and Cloudflare
+- 🚀 **Seamless Hosting**: Deploy your ApostropheCMS + Astro Essentials project with [ApostropheCMS hosting](https://apostrophecms.com/hosting) for zero-config deployment, or choose from flexible alternatives like Netlify, Vercel, and Cloudflare
 
 **For Content Teams:**
 - ✏️ **True WYSIWYG**: Edit content directly on the live site with ApostropheCMS's in-context editing
@@ -119,8 +119,8 @@ To simplify dependency management, this repository includes several root-level s
 
 1. **Clone the repo and install dependencies**
    ```bash
-   git clone https://github.com/apostrophecms/combined-astro-starter-kit.git
-   cd combined-astro-example
+   git clone https://github.com/apostrophecms/starter-kit-astro-essentials.git
+   cd starter-kit-astro-essentials
    npm install
    ```
 2. **Set up environment variables**
