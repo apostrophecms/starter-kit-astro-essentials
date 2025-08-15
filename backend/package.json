@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Apostrophe starter kit project for Astro integration",
   "main": "app.js",
+  "type": "module",
   "scripts": {
     "start": "node app",
-    "dev": "nodemon",
+    "dev": "APOS_EXTERNAL_FRONT_KEY=dev nodemon",
     "build": "NODE_ENV=production node app @apostrophecms/asset:build",
     "serve": "NODE_ENV=production node app",
     "release": "npm install && npm run build && npm run migrate",
@@ -36,13 +37,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/apostrophecms/starter-kit-astro"
+    "url": "https://github.com/apostrophecms/combined-astro-starter-kit"
   },
   "author": "Apostrophe Technologies, Inc.",
   "license": "MIT",
   "dependencies": {
     "@apostrophecms/blog": "^1.0.4",
-    "apostrophe": "^4.0.0"
+    "apostrophe": "^4.20.0"
   },
   "devDependencies": {
     "eslint": "^8.0.0",
