@@ -4,6 +4,11 @@ import apostrophe from '@apostrophecms/apostrophe-astro';
 
 export default defineConfig({
   output: 'server',
+  server: {
+    port: process.env.PORT ? parseInt(process.env.PORT) : 4321,
+    // Required for some hosting, like Heroku
+    // host: true
+  },
   adapter: node({
     mode: 'standalone'
   }),
