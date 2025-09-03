@@ -17,6 +17,6 @@ export default {
       basics: {
         fields: [ 'title', 'publishedAt', 'main' ]
       }
-    } 
+    }
   }
 };
