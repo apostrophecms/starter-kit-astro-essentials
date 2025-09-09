@@ -47,7 +47,7 @@
     "apostrophe": "^4.20.0"
   },
   "devDependencies": {
-    "eslint-config-apostrophe": "github:apostrophecms/eslint-config-apostrophe#pro-8109-upgrade-dependencies",
+    "eslint-config-apostrophe": "^6.0.0",
     "nodemon": "^3.0.1"
   }
 }
