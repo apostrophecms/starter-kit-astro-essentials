@@ -11,7 +11,7 @@ export default {
             '@apostrophecms/rich-text': {},
             '@apostrophecms/image': {},
             '@apostrophecms/video': {},
-            'two-column': {}
+            '@apostrophecms/layout': {}
           }
         }
       },

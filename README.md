@@ -40,26 +40,9 @@ This powerful combination gives you Astro's incredible performance and developer
   - [✨ Why Use This Combination](#-why-use-this-combination)
   - [🎯 What Makes This Special](#-what-makes-this-special)
   - [🚀 Quick Start](#-quick-start)
-    - [Prerequisites](#prerequisites)
-    - [Get Running in Minutes](#get-running-in-minutes)
   - [🏗️ Architecture Overview](#️-architecture-overview)
-    - [How It Works](#how-it-works)
-    - [Project Structure](#project-structure)
-    - [For ApostropheCMS Developers](#for-apostrophecms-developers)
-    - [For Astro Developers](#for-astro-developers)
   - [🖼️ Image Helper Functions](#️-image-helper-functions)
-    - [Overview](#overview)
-    - [Working with Image Relationships](#working-with-image-relationships)
-    - [Working with Direct Attachments](#working-with-direct-attachments)
-    - [Image Cropping and Sizes](#image-cropping-and-sizes)
-    - [Working with Focal Points](#working-with-focal-points)
-    - [Core Functions Reference](#core-functions-reference)
   - [🚀 Deployment Options](#-deployment-options)
-    - [**ApostropheCMS Hosting** (Recommended)](#apostrophecms-hosting-recommended)
-    - [**DIY Deployment**](#diy-deployment)
-      - [Backend (ApostropheCMS) Deployment](#backend-apostrophecms-deployment)
-      - [Frontend (Astro) Deployment](#frontend-astro-deployment)
-      - [Netlify Deployment Example](#netlify-deployment-example)
   - [🚑 Need Help?](#-need-help)
   - [📚 Learn More](#-learn-more)
   - [🎯 Ready to Build Something Amazing?](#-ready-to-build-something-amazing)
@@ -70,7 +53,7 @@ This powerful combination gives you Astro's incredible performance and developer
 This is a **minimal, non-opinionated foundation** that demonstrates the ApostropheCMS + Astro integration without imposing design decisions on your project. You get the essential building blocks:
 
 - **Basic Page Types**: Home page, default content page, and simple blog structure
-- **Core Widgets**: Rich text, images, video, and a two-column layout widget
+- **Core Widgets**: Rich text, images, video, and a layout widget
 - **Clean Architecture**: Well-organized but unopinionated code structure
 - **Integration Examples**: Working demonstrations of content fetching and rendering
 
