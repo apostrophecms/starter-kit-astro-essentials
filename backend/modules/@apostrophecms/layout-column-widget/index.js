@@ -6,13 +6,15 @@ export default {
           type: 'area',
           label: 'Main Content',
           options: {
-          widgets: {
-            '@apostrophecms/rich-text': {},
-            '@apostrophecms/image': {},
-            '@apostrophecms/video': {},
-            '@apostrophecms/layout': {}
+            widgets: {
+              '@apostrophecms/rich-text': {},
+              '@apostrophecms/image': {},
+              '@apostrophecms/video': {},
+              '@apostrophecms/layout': {}
+            }
+          }
         }
       }
-    }
+    };
   }
 };
