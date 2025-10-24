@@ -7,10 +7,10 @@ export default {
           label: 'Main Content',
           options: {
             widgets: {
+              'nested-layout': {},
               '@apostrophecms/rich-text': {},
               '@apostrophecms/image': {},
-              '@apostrophecms/video': {},
-              'nested-layout': {}
+              '@apostrophecms/video': {}
             }
           }
         }
