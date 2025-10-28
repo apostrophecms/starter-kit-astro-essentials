@@ -70,7 +70,7 @@ This powerful combination gives you Astro's incredible performance and developer
 This is a **minimal, non-opinionated foundation** that demonstrates the ApostropheCMS + Astro integration without imposing design decisions on your project. You get the essential building blocks:
 
 - **Basic Page Types**: Home page, default content page, and simple blog structure
-- **Core Widgets**: Rich text, images, video, and a two-column layout widget
+- **Core Widgets**: Rich text, images, video, and a layout widget
 - **Clean Architecture**: Well-organized but unopinionated code structure
 - **Integration Examples**: Working demonstrations of content fetching and rendering
 
