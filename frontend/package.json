@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@apostrophecms/apostrophe-astro": "^1.4.0",
+    "@apostrophecms/frontend": "workspace:*",
     "@astrojs/node": "^9.4.3",
     "astro": "^5.13.7",
     "dayjs": "^1.11.10",

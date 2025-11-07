@@ -1,7 +1,7 @@
-import RichTextWidget from './RichTextWidget.astro';
-import ImageWidget from './ImageWidget.astro';
-import VideoWidget from './VideoWidget.astro';
-import TwoColumnWidget from './TwoColumnWidget.astro';
+import RichTextWidget from '@apostrophecms/frontend/astro/widgets/RichTextWidget.astro';
+import ImageWidget from '@apostrophecms/frontend/astro/widgets/ImageWidget.astro';
+import VideoWidget from '@apostrophecms/frontend/astro/widgets/VideoWidget.astro';
+import TwoColumnWidget from '@apostrophecms/frontend/astro/widgets/TwoColumnWidget.astro';
 
 const widgetComponents = {
   '@apostrophecms/rich-text': RichTextWidget,

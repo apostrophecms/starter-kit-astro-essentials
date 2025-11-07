@@ -1,0 +1,20 @@
+{
+  "name": "@apostrophecms/frontend",
+  "version": "1.0.0",
+  "description": "Astro widget components for ApostropheCMS",
+  "type": "module",
+  "exports": {
+    "./astro/widgets/*": "./astro/widgets/*"
+  },
+  "peerDependencies": {
+    "@apostrophecms/apostrophe-astro": "^1.4.0",
+    "astro": "^5.0.0"
+  },
+  "keywords": [
+    "apostrophecms",
+    "astro",
+    "widgets"
+  ],
+  "author": "Apostrophe Technologies Inc.",
+  "license": "MIT"
+}

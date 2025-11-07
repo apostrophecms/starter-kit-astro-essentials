@@ -7,14 +7,14 @@ import {
   getHeight,
 } from "@apostrophecms/apostrophe-astro/lib/attachment.js";
 import { slugify } from "@apostrophecms/apostrophe-astro/lib/util.js";
-import placeholderImg from "../../public/images/image-widget-placeholder.jpg";
+import placeholderImgUrl from "../../public/images/image-widget-placeholder.jpg?url";
 import Figure from "../components/Figure.astro";
 
 const { widget = {} } = Astro.props;
 const placeholder = widget?.aposPlaceholder;
 const imageObj = widget?._image?.[0];
 
-const src = placeholder ? placeholderImg.src : getAttachmentUrl(imageObj);
+const src = placeholder ? placeholderImgUrl : getAttachmentUrl(imageObj);
 
 const srcset = placeholder ? "" : getAttachmentSrcset(imageObj);
 const objectPosition = placeholder ? "center center" : getFocalPoint(imageObj);
@@ -61,4 +61,27 @@ switch (widget.linkTo) {
 }
 ---
 
-<Figure {image} {link} caption={widget.caption} {style} />
+<div class="image-widget-wrapper">
+  <div class="test-hmr-banner">
+    🔥 HMR Working! Styles from workspace package!!!
+  </div>
+  <Figure {image} {link} caption={widget.caption} {style} />
+</div>
+
+<style is:global>
+  .image-widget-wrapper {
+    position: relative;
+  }
+
+  .test-hmr-banner {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+  }
+</style>
