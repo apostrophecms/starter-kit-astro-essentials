@@ -6,11 +6,11 @@
   "type": "module",
   "scripts": {
     "start": "node app",
-    "dev": "APOS_EXTERNAL_FRONT_KEY=dev nodemon",
-    "build": "NODE_ENV=production node app @apostrophecms/asset:build",
-    "serve": "NODE_ENV=production node app",
+    "dev": "crossenv APOS_EXTERNAL_FRONT_KEY=dev nodemon",
+    "build": "crossenv NODE_ENV=production node app @apostrophecms/asset:build",
+    "serve": "crossenv NODE_ENV=production node app",
     "release": "npm install && npm run build && npm run migrate",
-    "migrate": "NODE_ENV=production node app @apostrophecms/migration:migrate"
+    "migrate": "crossenv NODE_ENV=production node app @apostrophecms/migration:migrate"
   },
   "nodemonConfig": {
     "delay": 1000,
@@ -44,7 +44,8 @@
   "dependencies": {
     "@apostrophecms/blog": "^1.0.4",
     "@apostrophecms/vite": "^1.1.0",
-    "apostrophe": "^4.23.1-alpha.1"
+    "apostrophe": "^4.23.1-alpha.1",
+    "crossenv": "^0.0.2-security"
   },
   "devDependencies": {
     "eslint-config-apostrophe": "^6.0.1",

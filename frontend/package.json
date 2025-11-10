@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "dev": "APOS_EXTERNAL_FRONT_KEY=dev astro dev",
+    "dev": "crossenv APOS_EXTERNAL_FRONT_KEY=dev astro dev",
     "start": "astro dev",
     "build": "astro build",
     "serve": "HOST=0.0.0.0 PORT=4321 node ./dist/server/entry.mjs",
@@ -14,6 +14,7 @@
     "@apostrophecms/apostrophe-astro": "^1.4.0",
     "@astrojs/node": "^9.4.3",
     "astro": "^5.13.7",
+    "crossenv": "^0.0.2-security",
     "dayjs": "^1.11.10",
     "postcss-viewport-to-container-toggle": "^1.1.0",
     "vite": "^7.1.5"
