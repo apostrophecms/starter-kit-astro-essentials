@@ -9,7 +9,8 @@ export default {
             widgets: {
               '@apostrophecms/rich-text': {},
               '@apostrophecms/image': {},
-              '@apostrophecms/video': {}
+              '@apostrophecms/video': {},
+              '@apostrophecms/file': {},
             }
           }
         }
