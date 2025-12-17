@@ -4,6 +4,7 @@ apostrophe({
   root: import.meta,
   shortName: 'starter-kit-astro',
   bundles: [ '@apostrophecms/blog' ],
+  nestedModuleSubdirs: true,
   modules: {
     // Apostrophe module configuration
     // *******************************
