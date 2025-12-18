@@ -2,8 +2,11 @@ export async function onRequest(context, next) {
   const { request, url } = context;
   
   // Check for your custom header
-  if (request.headers.get('apos-external-front-key')) {
-    
+  const key = request.headers.get('apos-external-front-key');
+  if (key) {
+    if (process.env.APOS_EXTERNAL_FRONT_KEY !== key) {
+      return new Response('Forbidden', { status: 403 });
+    }
     // Forward the request to the other server
     const newUrl = url.toString().replace(':4321', ':3000');
     const proxyResponse = await fetch(newUrl, {
