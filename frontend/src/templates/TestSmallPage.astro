@@ -1,0 +1,14 @@
+---
+import AposArea from '@apostrophecms/apostrophe-astro/components/AposArea.astro';
+const { page, user, query } = Astro.props.aposData;
+const { topArea } = page;
+---
+
+<section class="bp-welcome">
+  <h1 class="bp-welcome__headline">
+    Welcome to Small page
+  </h1>
+  <div class="bp-welcome__area">
+    <AposArea area={topArea} />
+  </div>
+</section>
