@@ -1,8 +1,8 @@
 export default {
   extend: '@apostrophecms/widget-type',
   options: {
-    label: 'Styles Widget (to test styles feature)'
-    // stylesWrapper: false
+    label: 'Styles Widget (to test styles feature)',
+    stylesWrapper: false
   },
   styles(self, options) {
     return {
