@@ -1,0 +1,12 @@
+---
+import { stylesElements, stylesAttributes } from '@apostrophecms/apostrophe-astro/lib/aposStyles.js';
+
+const { widget } = Astro.props;
+---
+<Fragment set:html={ stylesElements(widget) } />
+<div {...stylesAttributes(
+  widget, {
+    class: ['fancy-article', 'foo-bar'],
+    style: 'color:red; background: yellow;',
+    foo: 'bar',
+}) }>{widget.title}</div>
