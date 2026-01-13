@@ -10,4 +10,9 @@
     object-fit: cover;
     aspect-ratio: var(--aspect-ratio, auto);
   }
+  /** Dynamic class for testing global styles */
+  .fancy-class {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
   
