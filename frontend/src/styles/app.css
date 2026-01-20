@@ -1,28 +1,27 @@
-  /* Image Widget */
-  .img-widget {
-    margin: 0;
-    width: 100%;
-  }
-  .img-widget img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-    aspect-ratio: var(--aspect-ratio, auto);
-  }
+/* Image Widget */
+.img-widget {
+  margin: 0;
+  width: 100%;
+}
+.img-widget img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: var(--aspect-ratio, auto);
+}
 
-  /* Styles aignment */
-  .apos-left {
-  margin-right: auto;
+/* Styles aignment */
+.apos-left {
+  margin-inline-end: auto;
 }
 
 .apos-center {
-  margin-right: auto;
-  margin-left: auto;
+  margin-inline: auto;
 }
 
 .apos-right {
-  margin-left: auto;
+  margin-inline-start: auto;
 }
 
 /* Rich Text Tables */
