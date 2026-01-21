@@ -1,0 +1,21 @@
+/* TEMP: scream test — make it unmistakable when overrides apply */
+.tableWrapper table,
+.apos-rich-text-table {
+  outline: 6px solid magenta;
+  background: rgba(255, 0, 255, 0.08);
+  width: 100%
+}
+
+.tableWrapper table th,
+.apos-rich-text-table th {
+  background: black;
+  color: yellow;
+}
+
+.tableWrapper table td,
+.tableWrapper table th,
+.apos-rich-text-table td,
+.apos-rich-text-table th {
+  border: 3px dashed lime;
+  padding: 18px;
+}

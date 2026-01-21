@@ -8,7 +8,6 @@ export default {
         type: 'area',
         options: {
           widgets: {
-            styles: {},
             '@apostrophecms/layout': {},
             '@apostrophecms/rich-text': {},
             '@apostrophecms/image': {},

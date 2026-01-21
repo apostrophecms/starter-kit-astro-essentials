@@ -26,7 +26,8 @@ apostrophe({
     // The project's first custom page type.
     'default-page': {},
     'two-column-widget': {},
-    '@apostrophecms/blog': {},
-    '@apostrophecms/blog-page': {}
+    // '@apostrophecms/blog': {},
+    // '@apostrophecms/blog-page': {},
+    '@apostrophecms/styles': {}
   }
 });
