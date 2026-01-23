@@ -22,4 +22,9 @@ if (aposData.notFound) {
     <meta charset="UTF-8" />
   </Fragment>
   <AposTemplate {aposData} slot="main" />
+  <Fragment {aposData} slot="endBody">
+    <script>
+      import "../widgets/players.ts";
+    </script>
+  </Fragment>
 </AposLayout>
