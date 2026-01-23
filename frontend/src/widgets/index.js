@@ -3,6 +3,8 @@ import ImageWidget from './ImageWidget.astro';
 import VideoWidget from './VideoWidget.astro';
 import LayoutWidget from '@apostrophecms/apostrophe-astro/widgets/LayoutWidget.astro';
 import LayoutColumnWidget from '@apostrophecms/apostrophe-astro/widgets/LayoutColumnWidget.astro';
+import NestedLayoutWidget from '@apostrophecms/apostrophe-astro/widgets/LayoutWidget.astro';
+import NestedLayoutColumnWidget from '@apostrophecms/apostrophe-astro/widgets/LayoutColumnWidget.astro';
 import FileWidget from './FileWidget.astro';
 
 const widgetComponents = {
@@ -11,6 +13,8 @@ const widgetComponents = {
   '@apostrophecms/video': VideoWidget,
   '@apostrophecms/layout': LayoutWidget,
   '@apostrophecms/layout-column': LayoutColumnWidget,
+  'nested-layout-widget': NestedLayoutWidget,
+  'nested-column-widget': NestedLayoutColumnWidget,
   '@apostrophecms/file': FileWidget,
 };
 

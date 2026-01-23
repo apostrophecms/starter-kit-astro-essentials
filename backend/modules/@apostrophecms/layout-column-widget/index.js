@@ -11,6 +11,7 @@ export default {
               '@apostrophecms/image': {},
               '@apostrophecms/video': {},
               '@apostrophecms/file': {},
+              'nested-layout': {}
             }
           }
         }
