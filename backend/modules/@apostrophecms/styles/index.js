@@ -225,6 +225,32 @@ export default {
       },
 
       // ============================================
+      // RICH TEXT WIDGET GLOBAL DEFAULTS
+      // ============================================
+
+      richTextDefaultWidth: {
+        type: 'range',
+        label: 'Default Width',
+        selector: [ '.apos-rich-text-editor__editor', '.rich-text-widget' ],
+        property: 'width',
+        min: 0,
+        max: 100,
+        step: 10,
+        def: 100,
+        unit: '%'
+      },
+      richTextDefaultMargin: {
+        preset: 'margin',
+        label: 'Default Margin',
+        selector: [ '.apos-rich-text-editor__editor', '.rich-text-widget' ]
+      },
+      richTextDefaultPadding: {
+        preset: 'padding',
+        label: 'Default Padding',
+        selector: [ '.apos-rich-text-editor__editor', '.rich-text-widget' ]
+      },
+
+      // ============================================
       // LAYOUT WIDGET GLOBAL DEFAULTS
       // ============================================
 
@@ -330,6 +356,14 @@ export default {
             fields: [
               'videoDefaultWidth',
               'videoDefaultAlignment'
+            ]
+          },
+          richTextDefaults: {
+            label: 'Rich Text Widgets',
+            fields: [
+              'richTextDefaultWidth',
+              'richTextDefaultMargin',
+              'richTextDefaultPadding'
             ]
           },
           layoutDefaults: {
