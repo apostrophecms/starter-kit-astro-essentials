@@ -26,6 +26,8 @@ apostrophe({
     'default-page': {},
     'two-column-widget': {},
     '@apostrophecms/blog': {},
-    '@apostrophecms/blog-page': {}
+    '@apostrophecms/blog-page': {},
+    '@apostrophecms/test-big-page': {},
+    '@apostrophecms/test-small-page': {}
   }
 });

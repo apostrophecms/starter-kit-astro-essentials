@@ -5,6 +5,14 @@ export default {
   options: {
     types: [
       {
+        name: '@apostrophecms/test-big-page',
+        label: 'Test Big Page'
+      },
+      {
+        name: '@apostrophecms/test-small-page',
+        label: 'Test Small Page'
+      },
+      {
         name: 'default-page',
         label: 'Default'
       },
