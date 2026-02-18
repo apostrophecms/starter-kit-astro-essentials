@@ -3,6 +3,7 @@ import aposPageFetch from "@apostrophecms/apostrophe-astro/lib/aposPageFetch.js"
 import AposLayout from "@apostrophecms/apostrophe-astro/components/layouts/AposLayout.astro";
 import AposTemplate from "@apostrophecms/apostrophe-astro/components/AposTemplate.astro";
 import "../styles/app.css";
+import "../styles/styles.css";
 
 const aposData = await aposPageFetch(Astro.request);
 const bodyClass = `myclass`;
@@ -21,5 +22,7 @@ if (aposData.notFound) {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="UTF-8" />
   </Fragment>
+  <main slot="beforeMain" class="main">
   <AposTemplate {aposData} slot="main" />
+  </main slot="afterMain" >
 </AposLayout>

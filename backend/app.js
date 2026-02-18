@@ -15,17 +15,14 @@ apostrophe({
     // have a minimal configuration here to turn them on: `moduleName: {}`
     // ***********************************************************************
     '@apostrophecms/vite': {},
-    // `className` options set custom CSS classes for Apostrophe core widgets.
-    '@apostrophecms/rich-text-widget': {
-    },
-    '@apostrophecms/image-widget': {
-    },
-    '@apostrophecms/video-widget': {
-    },
+    '@apostrophecms/rich-text-widget': {},
+    '@apostrophecms/image-widget': {},
+    '@apostrophecms/video-widget': {},
     // The project's first custom page type.
     'default-page': {},
-    'two-column-widget': {},
     '@apostrophecms/blog': {},
-    '@apostrophecms/blog-page': {}
+    '@apostrophecms/blog-page': {},
+    'nested-layout-widget': {},
+    'nested-column-widget': {}
   }
 });
