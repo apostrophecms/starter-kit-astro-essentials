@@ -1,11 +1,16 @@
 import { defineConfig } from 'astro/config';
+import { loadEnv } from 'vite';
 import node from '@astrojs/node';
 import apostrophe from '@apostrophecms/apostrophe-astro';
+
+// Load .env variables into the config file context.
+// process.env is used as a fallback for variables set via the CLI or shell.
+const env = loadEnv(process.env.NODE_ENV || 'development', process.cwd(), '');
 
 export default defineConfig({
   output: 'server',
   server: {
-    port: process.env.PORT ? parseInt(process.env.PORT) : 4321,
+    port: env.PORT ? parseInt(env.PORT) : 4321,
     // Required for some hosting, like Heroku
     // host: true
   },
