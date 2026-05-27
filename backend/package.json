@@ -45,7 +45,8 @@
     "@apostrophecms/blog": "^1.0.4",
     "@apostrophecms/vite": "^1.1.0",
     "apostrophe": "^4.23.0",
-    "cross-env": "^10.1.0"
+    "cross-env": "^10.1.0",
+    "dotenv": "^17.4.2"
   },
   "devDependencies": {
     "eslint-config-apostrophe": "^6.0.1",
