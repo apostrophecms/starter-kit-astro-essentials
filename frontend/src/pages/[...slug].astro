@@ -1,12 +1,32 @@
 ---
+import { getAllStaticPaths } from "@apostrophecms/apostrophe-astro/lib/static.js";
+import { getAposHost } from "@apostrophecms/apostrophe-astro/helpers";
 import aposPageFetch from "@apostrophecms/apostrophe-astro/lib/aposPageFetch.js";
 import AposLayout from "@apostrophecms/apostrophe-astro/components/layouts/AposLayout.astro";
 import AposTemplate from "@apostrophecms/apostrophe-astro/components/AposTemplate.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { basePath } from "@app/utils/index.js";
+import "../styles/scss/index.scss";
 import "../styles/app.css";
 import "../styles/styles.css";
 
+export async function getStaticPaths() {
+  return getAllStaticPaths({
+    aposHost: getAposHost(),
+    aposExternalFrontKey: import.meta.env.APOS_EXTERNAL_FRONT_KEY,
+  });
+}
+
 const aposData = await aposPageFetch(Astro.request);
-const bodyClass = `myclass`;
+
+// Determine body class based on page type
+const isHomePage = aposData.page?.type === "@apostrophecms/home-page";
+const bodyClass = isHomePage ? "home-page" : "";
+
+// Get title
+const title = aposData.piece?.title || aposData.page?.title;
+const siteTitle = aposData.global?.siteTitle || "ApostropheCMS Demo";
 
 if (aposData.redirect) {
   return Astro.redirect(aposData.url, aposData.status);
@@ -16,13 +36,49 @@ if (aposData.notFound) {
 }
 ---
 
-<AposLayout title={aposData.page?.title} {aposData} {bodyClass}>
+<AposLayout title={`${title} - ${siteTitle}`} {aposData} {bodyClass}>
   <Fragment slot="standardHead">
     <meta name="description" content={aposData.page?.seoDescription} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="UTF-8" />
+    <link
+      rel="preload"
+      href={basePath("/fonts/poppins.subset.woff2")}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={basePath("/fonts/quicksand.subset.woff2")}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={basePath("/fonts/roboto.subset.woff2")}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={basePath("/fonts/roboto-italic.subset.woff2")}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
   </Fragment>
-  <main slot="beforeMain" class="main">
+
+  <SiteHeader {aposData} slot="beforeMain" />
+
   <AposTemplate {aposData} slot="main" />
-  </main slot="afterMain" >
+
+  <SiteFooter slot="afterMain" />
+  <Fragment {aposData} slot="endBody">
+    <script>
+      import "../widgets/players.ts";
+    </script>
+  </Fragment>
 </AposLayout>

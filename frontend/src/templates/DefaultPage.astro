@@ -1,10 +1,20 @@
 ---
 import AposArea from '@apostrophecms/apostrophe-astro/components/AposArea.astro';
-const { page, user, query } = Astro.props.aposData;
-const { main } = page;
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const { page } = Astro.props.aposData;
 ---
 
-<section class="bp-content">
-  <h1>{ page.title }</h1>
-  <AposArea area={main} />
-</section>
+<Breadcrumbs {page} />
+
+<div class="page-title-wrapper">
+  <h1 class="page-title">{page.title}</h1>
+</div>
+
+<div class="layout">
+  <main>
+    <div class="general-content">
+      <AposArea area={page.main} />
+    </div>
+  </main>
+</div>

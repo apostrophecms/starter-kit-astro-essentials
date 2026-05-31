@@ -9,3 +9,74 @@ main {
   margin-left: auto;
   margin-right: auto;
 }
+/* @font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Regular.woff2') format('woff2'),
+       url('/fonts/Inter-Regular.woff') format('woff');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --content-max-width: 1200px;
+  --clr-neutral-100: hsl(48, 71%, 99%);
+  --clr-neutral-200: hsl(237, 20%, 80%);
+  --clr-neutral-400: hsl(252, 2%, 41%);
+  --clr-neutral-800: hsl(240, 100%, 5%);
+  --clr-neutral-900: hsl(238, 92%, 5%);
+
+  --clr-orange: hsl(5, 86%, 63%);
+  --clr-yellow: hsl(33, 79%, 61%);
+
+  --clr-accent-400: var(--clr-orange-400);
+
+  --ff-base: 'Inter', sans-serif;
+
+  --fw-regular: 400;
+  --fw-semi-bold: 700;
+  --fw-bold: 900;
+
+  --fs-400: 1rem;
+  --fs-500: 1.25rem;
+  --fs-600: 1.5rem;
+  --fs-700: 2rem;
+  --fs-800: 2.5rem;
+  --fs-900: 3rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+p,
+li {
+  text-wrap: pretty;
+  max-width: 100ch;
+}
+
+[role="list"] {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+} */
+
+/* body {
+  margin: 0;
+  font-family: var(--ff-base);
+  background-color: var(--clr-neutral-400);
+  line-height: 1.6;
+} */
+
+/* main {
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin-left: auto;
+  margin-right: auto;
+} */

@@ -1,0 +1,170 @@
+---
+import {
+  getAttachmentUrl,
+  getAttachmentSrcset,
+  getFocalPoint,
+  getWidth,
+  getHeight
+} from '@apostrophecms/apostrophe-astro/lib/attachment.js';
+import LocaleSwitcher from "./LocaleSwitcher.astro";
+import { basePath } from "@app/utils/index.js";
+
+const { aposData } = Astro.props;
+const { page, home, global, localizations } = aposData;
+
+const logoAttachment = global?._siteLogo?.[0];
+const logoUrl = logoAttachment
+  ? getAttachmentUrl(logoAttachment, { size: "one-third" })
+  : null;
+const logoWidth = logoAttachment ? getWidth(logoAttachment) : 100;
+const logoHeight = logoAttachment ? getHeight(logoAttachment) : 36;
+---
+<header class="header">
+  <div class="nav-bar">
+    <h2>
+      <a href={basePath("/")}>
+        {
+          logoAttachment ? (
+            <img
+              src={logoUrl}
+              alt={global?.siteTitle || "Home"}
+              width={logoWidth}
+              height={logoHeight}
+            />
+          ) : (
+            global?.siteTitle || "Site Title"
+          )
+        }
+      </a>
+    </h2>
+    <nav class="nav" role="navigation">
+      <ul>
+        <li>
+          <a
+            class={page?.slug === home?.slug ? "active" : ""}
+            href={home?._url || "/"}>{home?.title || "Home"}</a
+          >
+        </li>
+        {
+          home?._children
+            ?.filter((p) => p.visibility === "public")
+            .map((navPage) => (
+              <li>
+                <a
+                  class={page?.slug === navPage.slug ? "active" : ""}
+                  href={navPage._url}
+                >
+                  {navPage.title}
+                </a>
+              </li>
+            ))
+        }
+      </ul>
+    </nav>
+    <div class="nav-bar__end">
+      <LocaleSwitcher localizations={localizations} />
+    </div>
+    <button
+      class="nav__mobile-button"
+      data-mobile-trigger
+      aria-controls="mobile-nav"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-menu-icon lucide-menu"
+        ><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"
+        ></path></svg
+      >
+      <span>Menu</span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-nav" data-mobile-nav="hidden" aria-hidden="true">
+  <button class="mobile-nav__close-trigger" data-mobile-close-trigger>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="lucide lucide-x-icon lucide-x"
+      ><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
+    >
+    <span>Close</span>
+  </button>
+  <nav id="mobile-nav" class="mobile-nav__nav" role="navigation">
+    <ul>
+      <li>
+        <a
+          class={page?.slug === home?.slug ? "active" : ""}
+          href={home?._url || "/"}>{home?.title || "Home"}</a
+        >
+      </li>
+      {
+        home?._children
+          ?.filter((p) => p.visibility === "public")
+          .map((navPage) => (
+            <li>
+              <a
+                class={page?.slug === navPage.slug ? "active" : ""}
+                href={navPage._url}
+              >
+                {navPage.title}
+              </a>
+            </li>
+          ))
+      }
+    </ul>
+  </nav>
+  <div class="mobile-nav__locales">
+    <LocaleSwitcher localizations={localizations} />
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    // Guard against duplicate initialization
+    if (window.__mobileNavInit) return;
+    window.__mobileNavInit = true;
+
+    function initMobileNav() {
+      const trigger = document.querySelector("[data-mobile-trigger]");
+      const closeTrigger = document.querySelector(
+        "[data-mobile-close-trigger]",
+      );
+      const mobileNav = document.querySelector("[data-mobile-nav]");
+
+      if (!trigger || trigger.dataset.initialized) return;
+      trigger.dataset.initialized = "true";
+
+      trigger.addEventListener("click", () => {
+        mobileNav?.classList.add("active");
+        mobileNav?.setAttribute("aria-hidden", "false");
+      });
+
+      closeTrigger?.addEventListener("click", () => {
+        mobileNav?.classList.remove("active");
+        mobileNav?.setAttribute("aria-hidden", "true");
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initMobileNav);
+    } else {
+      initMobileNav();
+    }
+  })();
+</script>

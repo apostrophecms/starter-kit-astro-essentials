@@ -1,0 +1,134 @@
+---
+const { localizations = [] } = Astro.props;
+const currentLocale = localizations?.find((l) => l.current);
+---
+
+{
+  localizations?.length > 0 && (
+    <div class="locales" data-locales>
+      <button
+        class="locales__toggler"
+        data-locales-toggle
+        aria-expanded="false"
+        aria-controls="locales-list"
+      >
+        {currentLocale && (
+          <span class="locales__toggler__text">
+            <div
+              class="locales__toggler__flag"
+              style={`background-image: url(https://flagsapi.com/${currentLocale.flag}/flat/32.png)`}
+            />
+            <span class="locales__toggler__active-label">
+              {currentLocale.label}
+            </span>
+            <svg
+              class="locales__toggler__chevron"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </span>
+        )}
+      </button>
+      <ul id="locales-list" class="locales__list" data-locales-list hidden>
+        {localizations
+          .filter((l) => l._url)
+          .map((localization) => (
+            <li
+              class={`locales__item ${localization.current ? "current" : ""}`}
+            >
+              <a href={localization._url || localization.homePageUrl}>
+                <div
+                  class="locales__toggler__flag"
+                  style={`background-image: url(https://flagsapi.com/${localization.flag}/flat/32.png)`}
+                >
+                  {localization.current && (
+                    <svg
+                      class="locales__toggler__check"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M20 6 9 17l-5-5" />
+                    </svg>
+                  )}
+                </div>
+                {localization.label}
+              </a>
+            </li>
+          ))}
+      </ul>
+    </div>
+  )
+}
+
+<script>
+  function initLocales() {
+    const locales = document.querySelector("[data-locales]");
+    const toggler = document.querySelector("[data-locales-toggle]");
+    const localeList = document.querySelector("[data-locales-list]");
+
+    if (!toggler || !localeList) {
+      return null; // Return null if not found
+    }
+
+    // Clean up previous instance if it exists
+    if (toggler._localeCleanup) {
+      toggler._localeCleanup();
+    }
+
+    function toggleLocales() {
+      const expanded =
+        toggler.getAttribute("aria-expanded") === "true" || false;
+      toggler.setAttribute("aria-expanded", !expanded);
+      localeList.hidden = expanded;
+    }
+
+    function clickOutside({ target }) {
+      const expanded =
+        toggler.getAttribute("aria-expanded") === "true" || false;
+      if (expanded && !locales.contains(target)) {
+        toggler.setAttribute("aria-expanded", false);
+        localeList.hidden = true;
+      }
+    }
+
+    toggler.addEventListener("click", toggleLocales);
+    window.addEventListener("click", clickOutside);
+
+    const cleanup = () => {
+      toggler.removeEventListener("click", toggleLocales);
+      window.removeEventListener("click", clickOutside);
+    };
+
+    toggler._localeCleanup = cleanup;
+    return cleanup;
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initLocales);
+  } else {
+    initLocales();
+  }
+
+  setTimeout(() => {
+    if (window.apos?.bus) {
+      window.apos.bus.on("refreshed", initLocales);
+      window.apos.bus.on("modal-resolved", initLocales);
+    }
+  }, 300);
+</script>

@@ -11,12 +11,6 @@
   aspect-ratio: var(--aspect-ratio, auto);
 }
 
-/* Responsive Images, including in rich-text widget */
-img {
-  max-width: 100%;
-  height: auto;
-}
-
 /* Styles aignment */
 .apos-left {
   margin-inline-end: auto;

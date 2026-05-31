@@ -1,0 +1,19 @@
+---
+const { page, piece } = Astro.props;
+const ancestors = page?._ancestors || [];
+const showBreadcrumbs = ancestors.length > 0;
+---
+
+{showBreadcrumbs && (
+  <div class="layout">
+    <nav class="breadcrumb">
+      {ancestors.map((ancestorPage) => (
+        <a href={ancestorPage._url}>{ancestorPage.title}</a>
+      ))}
+      <a class={!piece ? 'current-page' : ''} href={page._url}>{page.title}</a>
+      {piece && (
+        <a class="current-page" href={piece._url}>{piece.title}</a>
+      )}
+    </nav>
+  </div>
+)}
