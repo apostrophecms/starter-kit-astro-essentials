@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "cd frontend && echo '\\n💡 running npm install in frontend/' && npm install && cd ../backend && echo '\\n💡 running npm install in backend/' && npm install && echo '\\n💡 combined npm install complete'",    
-    "update": "cd frontend && echo '\\n💡 running npm update in frontend/' && npm update && cd ../backend && echo '\\n💡 running npm update in backend/' && npm update && echo '\\n💡 combined npm update complete'",    
+    "postinstall": "cd frontend && echo '\\n💡 running npm install in frontend/' && npm install && cd ../backend && echo '\\n💡 running npm install in backend/' && npm install && echo '\\n💡 combined npm install complete'",
+    "update": "cd frontend && echo '\\n💡 running npm update in frontend/' && npm update && cd ../backend && echo '\\n💡 running npm update in backend/' && npm update && echo '\\n💡 combined npm update complete'",
     "build": "npm run build-frontend && npm run build-backend && echo '\\n💡 combined build complete'",
     "build-frontend": "echo '\\n💡 running npm run build in frontend/' && cd frontend && npm run build",
     "build-backend": "echo '\\n💡 running npm run build in backend/' && cd backend && npm run build",
@@ -28,5 +28,6 @@
   "bugs": {
     "url": "https://github.com/apostrophecms/combined-astro-starter-kit/issues"
   },
-  "homepage": "https://github.com/apostrophecms/combined-astro-starter-kit#readme"
+  "homepage": "https://github.com/apostrophecms/combined-astro-starter-kit#readme",
+  "packageManager": "pnpm@10.29.3+sha512.498e1fb4cca5aa06c1dcf2611e6fafc50972ffe7189998c409e90de74566444298ffe43e6cd2acdc775ba1aa7cc5e092a8b7054c811ba8c5770f84693d33d2dc"
 }
