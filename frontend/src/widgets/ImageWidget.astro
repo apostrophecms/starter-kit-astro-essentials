@@ -1,4 +1,7 @@
 ---
+// Use these attachment helpers for all image rendering — do not navigate
+// widget._image[0].attachment manually. They handle URL construction, srcset
+// generation, focal point, and intrinsic dimensions consistently.
 import {
   getAttachmentUrl,
   getAttachmentSrcset,
@@ -12,6 +15,8 @@ import Figure from "../components/Figure.astro";
 
 const { widget = {} } = Astro.props;
 const placeholder = widget?.aposPlaceholder;
+// Fields prefixed with _ are relationship fields populated by Apostrophe at request
+// time. They are always returned as arrays, even when max: 1 — use [0] to get the item.
 const imageObj = widget?._image?.[0];
 
 const src = placeholder ? placeholderImg.src : getAttachmentUrl(imageObj);

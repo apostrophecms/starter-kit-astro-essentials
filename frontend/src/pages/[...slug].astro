@@ -5,6 +5,10 @@ import AposTemplate from "@apostrophecms/apostrophe-astro/components/AposTemplat
 import "../styles/app.css";
 import "../styles/styles.css";
 
+// aposPageFetch fetches the full page payload from the ApostropheCMS backend for the
+// current URL. It returns an object with: `page` (the page document), `piece` (set on
+// piece-show routes), `global` (global config), and flags like `redirect` and `notFound`.
+// Downstream templates receive this object as `Astro.props.aposData`.
 const aposData = await aposPageFetch(Astro.request);
 const bodyClass = `myclass`;
 

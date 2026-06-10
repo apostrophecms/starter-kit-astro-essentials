@@ -1,3 +1,7 @@
+// Widget registry — maps backend module names to Astro components.
+// Keys MUST match the backend module name exactly (e.g. '@apostrophecms/rich-text', 'hero').
+// A wrong or missing key silently falls back to a default renderer — the widget
+// will appear blank in the frontend with no console warning or error thrown.
 import RichTextWidget from './RichTextWidget.astro';
 import ImageWidget from './ImageWidget.astro';
 import VideoWidget from './VideoWidget.astro';
