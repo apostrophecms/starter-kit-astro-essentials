@@ -53,6 +53,30 @@ const author = article._author?.[0]?.title;
 | `frontend/src/utils/link.js` | `getLinkPath(link)` — resolves a link object to a URL. `opensInNewTab(linkTarget)` — checks if target is `_blank`. Always use these; do not navigate `_linkPage[0]._url` manually. |
 | `@apostrophecms/apostrophe-astro/lib/attachment.js` | `getAttachmentUrl()`, `getAttachmentSrcset()`, `getFocalPoint()`, `getWidth()`, `getHeight()`. Use these for all image rendering. See `ImageWidget.astro` for the canonical example. |
 
+## Client-Side Behavior
+
+A custom element must be **registered independently of whether its widget rendered on the page**. `customElements.define()` writes to a single document-global registry, so registration is document-scoped by the platform's design, not component-scoped.
+
+This is why widget JavaScript does not belong in an inline `<script>` inside the widget component. Astro hoists a component-scoped script into the page bundle only for components that were server-rendered on that page — so when an editor adds a widget in-context, Apostrophe injects the markup client-side and the script is never loaded. The widget silently does nothing.
+
+Register at page level instead:
+
+| File | Role |
+|---|---|
+| `frontend/src/widgets/<Name>.ts` | The custom element class and its `customElements.define()` call |
+| `frontend/src/widgets/players.ts` | Imports every such module; the single registration point |
+| `frontend/src/pages/[...slug].astro` | Loads `players.ts` from the `endBody` slot |
+
+Prefer resolving data server-side in the component's frontmatter and passing it down as a `data-` attribute over fetching from the element itself — apostrophe-astro re-renders through Astro on every edit-mode change, so server-resolved data stays fresh. `VideoWidget.astro` / `VideoWidget.ts` is the canonical example.
+
+Registration has to be eager; the implementation behind it does not. Everything `players.ts` imports ships on every page, so if the registry grows, keep only `customElements.define()` at page level and pull the heavy code in via a dynamic `import()` on first use.
+
+## Layout Slots
+
+`AposLayout` exposes eight slots: `startHead`, `standardHead`, `extraHead`, `startBody`, `beforeMain`, `main`, `afterMain`, `endBody`. It renders `beforeMain`, `main` and `afterMain` as **siblings**, with Apostrophe's `prependMain` / `appendMain` injections bracketing the `main` slot — matching the block structure of Apostrophe's own `outerLayoutBase.html`.
+
+A project wrapper such as `<main>` therefore goes *inside* the `main` slot. Splitting an element's opening and closing tags across `beforeMain` and `afterMain` does not work: Astro drops attributes on a closing tag, so the element closes early and the injections land outside it.
+
 ## i18n Convention
 
 The starter uses the `project:` namespace by default (`label: 'project:myField'`), with translation files at `backend/modules/@apostrophecms/i18n/i18n/project/`. Add new keys there or introduce your own namespace with a matching folder.

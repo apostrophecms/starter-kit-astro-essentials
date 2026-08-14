@@ -26,7 +26,21 @@ if (aposData.notFound) {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="UTF-8" />
   </Fragment>
-  <main slot="beforeMain" class="main">
-  <AposTemplate {aposData} slot="main" />
-  </main slot="afterMain" >
+  {/*
+    AposLayout renders beforeMain, main and afterMain as siblings, so the
+    project's <main> wrapper (styled in styles.css) belongs in the main slot
+    itself. Splitting the open and close tags across beforeMain/afterMain does
+    not work: Astro drops attributes on a closing tag, so the element closes
+    early and Apostrophe's prependMain/appendMain injections land outside it.
+  */}
+  <main slot="main" class="main">
+    <AposTemplate {aposData} />
+  </main>
+  <Fragment {aposData} slot="endBody">
+    <script>
+      // Registers widget custom elements (e.g. <video-widget>) at page level so
+      // they are defined even when a widget is added client-side in edit mode.
+      import "../widgets/players.ts";
+    </script>
+  </Fragment>
 </AposLayout>

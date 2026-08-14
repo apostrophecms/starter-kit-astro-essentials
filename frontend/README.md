@@ -18,5 +18,6 @@ Runs on **http://localhost:4321**. Requires the ApostropheCMS backend to be runn
 - **All routing** is handled by `src/pages/[...slug].astro` — the CMS drives the URL structure.
 - **Page type components** are mapped in `src/templates/index.js`; widget components in `src/widgets/index.js`.
 - **Link and image helpers** live in `src/utils/link.js` and `@apostrophecms/apostrophe-astro/lib/attachment.js` — use these instead of navigating raw CMS data manually.
+- **Custom elements** are registered in `src/widgets/players.ts`, not in an inline `<script>` inside the widget component — registration has to happen whether or not the widget rendered on the page. See the note in the [root README](../README.md#for-astro-developers) for why.
 
 For general Astro patterns, see the [Astro documentation](https://docs.astro.build/). For the CMS integration, see the [`apostrophe-astro` package](https://github.com/apostrophecms/apostrophe-astro).

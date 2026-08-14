@@ -200,12 +200,13 @@ The Astro portion follows standard conventions with components in `src` and asse
 **What stays the same:**
 - Standard Astro project organization
 - Normal component and template patterns
-- Client-side asset management
+- Static asset management in `public`
 
 **Key differences:**
 - **Single route system** - Instead of multiple routes in `pages`, there's one `[...slug].astro` file that handles all routing
 - **Template mapping** - Pages map to templates in the `templates` folder, mapped by the `index.js` file in that folder. Each template corresponds to an ApostropheCMS page type, including `index.html` and `show.html` piece-page types
 - **Widget system** - The `widgets` folder contains templates for ApostropheCMS widgets, mapped through an `index.js` file in that folder.
+- **Client-side JavaScript** - A custom element has to be registered independently of whether its widget rendered on the page, because `customElements.define()` writes to a single document-global registry. So do not put an inline `<script>` in a widget component: Astro bundles a component-scoped script only for pages that server-rendered that component, and a widget added in-context by an editor would never have its script loaded. Put the element in its own module and register it from `src/widgets/players.ts`, which `[...slug].astro` loads at page level. See `VideoWidget.astro` / `VideoWidget.ts` for the reference implementation.
 - **Required configuration** - The `apostrophe` integration and `output: 'server'` settings must remain for backend integration
 
 Content is populated by data from the CMS backend and inserted into slots in the main `[...slug].astro` file. Widget data is handled through the mapped templates and added to page templates using the `AposArea` helper component.

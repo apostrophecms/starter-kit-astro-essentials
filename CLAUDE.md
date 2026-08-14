@@ -13,8 +13,49 @@ Start dev: `npm run install-all` then `npm run dev` → visit `http://localhost:
 3. Create `frontend/src/widgets/MyWidget.astro`. Widget data arrives as `Astro.props.widget`.
 4. Add the mapping in `frontend/src/widgets/index.js`: `'my-widget': MyWidget`.
 5. Add the widget to an area's `widgets` config in the relevant backend schema (import from `backend/lib/area.js` or inline).
+6. If the widget needs client-side JavaScript, see **Client-Side Widget JavaScript** below — do not add an inline `<script>` to the `.astro` file.
 
 The key in `index.js` must match the backend module name exactly — a mismatch silently falls back to a default renderer.
+
+## Client-Side Widget JavaScript
+
+**The rule:** a custom element must be *registered* independently of whether its widget rendered on the page. `customElements.define()` writes to a single document-global registry, so registration was never a component-scoped concern to begin with.
+
+Never put an inline `<script>` in a widget component. Astro hoists a component-scoped script into the page bundle only for components that were server-rendered on that page. When an editor *adds* a widget in-context, Apostrophe injects the markup client-side, the script was never bundled, and the widget silently does nothing — with no console error.
+
+Register at page level instead:
+
+1. Put the class and its `customElements.define()` call in `frontend/src/widgets/MyWidget.ts`.
+2. Add `import './MyWidget';` to `frontend/src/widgets/players.ts`.
+3. `players.ts` is already loaded from the `endBody` slot in `frontend/src/pages/[...slug].astro`; nothing else is needed.
+
+Resolve data in the component's frontmatter and pass it to the element as a `data-` attribute rather than fetching from inside the element. apostrophe-astro re-renders through Astro on every edit-mode change, so server-resolved data stays current.
+
+```astro
+---
+// aposFetch is server-side only — never import it into client code.
+import { aposFetch } from '@apostrophecms/apostrophe-astro/helpers/server';
+const response = await aposFetch('/api/v1/...');
+const payload = response.ok ? JSON.stringify(await response.json()) : '';
+---
+<my-widget data-payload={payload}></my-widget>
+```
+
+`VideoWidget.astro` / `VideoWidget.ts` is the reference implementation.
+
+Registration must be eager; the *implementation* behind it need not be. Everything `players.ts` imports ships on every page, so if it grows large, move the heavy code behind a dynamic `import()` inside `connectedCallback` and keep only the `customElements.define()` call at page level. Note that a dynamic import also stops Astro inlining the script into each page's HTML, making it a separately cached file instead.
+
+## Layout Slots
+
+`AposLayout` renders `beforeMain`, `main` and `afterMain` as siblings, with Apostrophe's `prependMain` / `appendMain` injections bracketing the `main` slot. A project wrapper like `<main>` belongs **inside** the `main` slot:
+
+```astro
+<main slot="main" class="main">
+  <AposTemplate {aposData} />
+</main>
+```
+
+Do not split an element's opening and closing tags across `beforeMain` and `afterMain` to wrap the main slot — Astro drops attributes on a closing tag, so the element closes early, the whole subtree lands in `beforeMain`, and the injections render outside it.
 
 ## Adding a Page Type
 
