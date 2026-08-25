@@ -26,7 +26,14 @@ if (aposData.notFound) {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="UTF-8" />
   </Fragment>
-  <main slot="beforeMain" class="main">
-  <AposTemplate {aposData} slot="main" />
-  </main slot="afterMain" >
+  <main slot="main" class="main">
+    <AposTemplate {aposData} />
+  </main>
+  <Fragment {aposData} slot="endBody">
+    <script>
+      // Registers widget custom elements (e.g. <video-widget>) at page level so
+      // they are defined even when a widget is added client-side in edit mode.
+      import "../widgets/players.ts";
+    </script>
+  </Fragment>
 </AposLayout>
