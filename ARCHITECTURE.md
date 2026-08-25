@@ -55,27 +55,30 @@ const author = article._author?.[0]?.title;
 
 ## Client-Side Behavior
 
-A custom element must be **registered independently of whether its widget rendered on the page**. `customElements.define()` writes to a single document-global registry, so registration is document-scoped by the platform's design, not component-scoped.
-
-This is why widget JavaScript does not belong in an inline `<script>` inside the widget component. Astro hoists a component-scoped script into the page bundle only for components that were server-rendered on that page — so when an editor adds a widget in-context, Apostrophe injects the markup client-side and the script is never loaded. The widget silently does nothing.
+Widget interactivity is implemented with web components. Their JavaScript does not belong in an inline `<script>` in the widget's `.astro` file: Astro hoists a component-scoped script into the page bundle only for components that server-render on that page. When an editor adds a widget in-context, Apostrophe injects the markup client-side, that script is not in the bundle, and the widget silently does nothing — with no console error. Registering at page level avoids
+this and costs nothing: `customElements.define()` writes to one document-global registry, so it is not a per-component concern.
 
 Register at page level instead:
 
 | File | Role |
 |---|---|
-| `frontend/src/widgets/<Name>.ts` | The custom element class and its `customElements.define()` call |
+| `frontend/src/widgets/<Name>.ts` | The web component class and its `customElements.define()` call |
 | `frontend/src/widgets/players.ts` | Imports every such module; the single registration point |
 | `frontend/src/pages/[...slug].astro` | Loads `players.ts` from the `endBody` slot |
 
 Prefer resolving data server-side in the component's frontmatter and passing it down as a `data-` attribute over fetching from the element itself — apostrophe-astro re-renders through Astro on every edit-mode change, so server-resolved data stays fresh. `VideoWidget.astro` / `VideoWidget.ts` is the canonical example.
 
-Registration has to be eager; the implementation behind it does not. Everything `players.ts` imports ships on every page, so if the registry grows, keep only `customElements.define()` at page level and pull the heavy code in via a dynamic `import()` on first use.
+If the project can be built as a static site, you can avoid request-time fetching altogether — `getAllStaticPaths()` resolves every page at build time, so the lookup happens once during the build rather than on each request. See our [static build support](https://apostrophecms.com/docs/tutorials/astro/static-builds-with-apostrophecms-astro.html) documentation. This does not replace page-level registration: in-context editing still runs against the SSR instance, where a widget can be added to a page that never rendered one.
+
+Registration of web components has to be eager; the implementation behind it does not. Everything `players.ts` imports ships on every page, so as the collection of web components grows, keep only `customElements.define()` at page level and pull the heavy code in via a dynamic `import()` on first use.
 
 ## Layout Slots
 
 `AposLayout` exposes eight slots: `startHead`, `standardHead`, `extraHead`, `startBody`, `beforeMain`, `main`, `afterMain`, `endBody`. It renders `beforeMain`, `main` and `afterMain` as **siblings**, with Apostrophe's `prependMain` / `appendMain` injections bracketing the `main` slot — matching the block structure of Apostrophe's own `outerLayoutBase.html`.
 
-A project wrapper such as `<main>` therefore goes *inside* the `main` slot. Splitting an element's opening and closing tags across `beforeMain` and `afterMain` does not work: Astro drops attributes on a closing tag, so the element closes early and the injections land outside it.
+A project wrapper such as `<main>` therefore goes *inside* the `main` slot — see `frontend/src/pages/[...slug].astro`.
+
+Astro slots are not Nunjucks blocks: you cannot wrap the main slot by splitting an element's opening and closing tags across `beforeMain` and `afterMain`. Astro drops attributes on a closing tag, so the element closes early, the whole subtree lands in `beforeMain`, and the injections render outside it — while still looking correct in the browser.
 
 ## i18n Convention
 
