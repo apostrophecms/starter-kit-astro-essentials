@@ -1,7 +1,10 @@
-// Widget registry — maps backend module names to Astro components.
-// Keys MUST match the backend module name exactly (e.g. '@apostrophecms/rich-text', 'hero').
-// A wrong or missing key silently falls back to a default renderer — the widget
-// will appear blank in the frontend with no console warning or error thrown.
+// Widget registry — maps widget types to Astro components.
+// Keys MUST be the widget type: the backend module name without the `-widget`
+// suffix (e.g. '@apostrophecms/rich-text-widget' -> '@apostrophecms/rich-text',
+// 'nested-layout-widget' -> 'nested-layout').
+// A wrong or missing key renders nothing — the widget will appear blank in the
+// frontend. The only sign is a "Missing widget mapping for <type>" error in the
+// frontend server log; nothing appears in the browser console.
 import RichTextWidget from './RichTextWidget.astro';
 import ImageWidget from './ImageWidget.astro';
 import VideoWidget from './VideoWidget.astro';
@@ -17,8 +20,8 @@ const widgetComponents = {
   '@apostrophecms/video': VideoWidget,
   '@apostrophecms/layout': LayoutWidget,
   '@apostrophecms/layout-column': LayoutColumnWidget,
-  'nested-layout-widget': NestedLayoutWidget,
-  'nested-column-widget': NestedLayoutColumnWidget,
+  'nested-layout': NestedLayoutWidget,
+  'nested-column': NestedLayoutColumnWidget,
   '@apostrophecms/file': FileWidget,
 };
 
