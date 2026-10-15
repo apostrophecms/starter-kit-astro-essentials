@@ -14,7 +14,7 @@ The `@apostrophecms/apostrophe-astro` bridge package connects them — it provid
 
 ## Component Registries
 
-Templates and widgets are mapped by name. Keys **must match backend module names exactly** or the component silently falls back to a default.
+Templates and widgets are mapped by name. Template keys **must match the page type's backend module name exactly**. Widget keys **must match the widget type**, which is the backend module name without the `-widget` suffix. A wrong widget key renders nothing; the only sign is a "Missing widget mapping for <type>" error in the frontend server log. A wrong template key silently falls back to the `apos-no-template` template if one is mapped.
 
 | Registry file | Maps |
 |---|---|
@@ -24,8 +24,8 @@ Templates and widgets are mapped by name. Keys **must match backend module names
 ```js
 // frontend/src/widgets/index.js
 const widgetComponents = {
-  '@apostrophecms/rich-text': RichTextWidget, // key = backend module name
-  'hero': HeroWidget,
+  '@apostrophecms/rich-text': RichTextWidget, // module @apostrophecms/rich-text-widget
+  'hero': HeroWidget, // module hero-widget
 };
 ```
 

@@ -11,11 +11,11 @@ Start dev: `npm run install-all` then `npm run dev` → visit `http://localhost:
 1. Create `backend/modules/my-widget/index.js` — set `extend: '@apostrophecms/widget-type'`, `options.label`, and `fields.add`.
 2. Register in `backend/app.js`: add `'my-widget': {}` to the `modules` object.
 3. Create `frontend/src/widgets/MyWidget.astro`. Widget data arrives as `Astro.props.widget`.
-4. Add the mapping in `frontend/src/widgets/index.js`: `'my-widget': MyWidget`.
-5. Add the widget to an area's `widgets` config in the relevant backend schema (import from `backend/lib/area.js` or inline).
+4. Add the mapping in `frontend/src/widgets/index.js`: `'my': MyWidget`. The key is the widget type — the module name without the `-widget` suffix.
+5. Add the widget to an area's `widgets` config (also by widget type: `'my': {}`) in the relevant backend schema (import from `backend/lib/area.js` or inline).
 6. If the widget needs client-side JavaScript, see **Client-Side Widget JavaScript** below — do not add an inline `<script>` to the `.astro` file.
 
-The key in `index.js` must match the backend module name exactly — a mismatch silently falls back to a default renderer.
+The key in `index.js` must be the widget type exactly. A mismatch renders nothing; the only sign is a "Missing widget mapping for <type>" error in the frontend server log.
 
 ## Client-Side Widget JavaScript
 
@@ -136,7 +136,7 @@ frontend/src/templates/index.js   Maps page type names → Astro components
 frontend/src/widgets/index.js     Maps widget names → Astro components
 ```
 
-Keys must match backend module names exactly (e.g. `'@apostrophecms/rich-text'`, `'hero'`). A wrong key silently falls back to a default renderer with no error — always verify against the backend module name.
+Template keys must match the page type's backend module name exactly. Widget keys must match the widget type: the backend module name without the `-widget` suffix (e.g. module `@apostrophecms/rich-text-widget` → key `'@apostrophecms/rich-text'`, module `hero-widget` → key `'hero'`). A wrong widget key renders nothing, with no browser console error — the only sign is a "Missing widget mapping for <type>" error in the frontend server log. A wrong template key silently falls back to the `apos-no-template` template if one is mapped.
 
 ## Project Constraints
 
