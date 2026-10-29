@@ -10,7 +10,7 @@ https://apostrophecms.com/docs/
 
 Hybrid monorepo: ApostropheCMS (port 3000) is the headless backend — it owns all content schemas, widgets, page types, pieces, and the admin UI. Astro (port 4321) is the frontend renderer — it fetches content from ApostropheCMS via REST and maps it to Astro components. The `@apostrophecms/apostrophe-astro` bridge package connects them and enables in-context editing.
 
-Start dev: `npm run install-all` then `npm run dev` → visit `http://localhost:4321`
+Start dev: `npm install` (installs `frontend/` and `backend/` too) then `npm run dev` → visit `http://localhost:4321`
 
 ## Adding a Widget
 
@@ -18,7 +18,7 @@ Start dev: `npm run install-all` then `npm run dev` → visit `http://localhost:
 2. Register in `backend/app.js`: add `'my-widget': {}` to the `modules` object.
 3. Create `frontend/src/widgets/MyWidget.astro`. Widget data arrives as `Astro.props.widget`.
 4. Add the mapping in `frontend/src/widgets/index.js`: `'my': MyWidget`. The key is the widget type — the module name without the `-widget` suffix.
-5. Add the widget to an area's `widgets` config (also by widget type: `'my': {}`) in the relevant backend schema (import from `backend/lib/area.js` or inline).
+5. Add the widget to an area's `widgets` config (also by widget type: `'my': {}`) in the relevant backend schema (inline, or from the shared list in `backend/lib/area.js`).
 6. If the widget needs client-side JavaScript, see **Client-Side Widget JavaScript** below — do not add an inline `<script>` to the `.astro` file.
 
 The key in `index.js` must be the widget type exactly. A mismatch renders nothing; the only sign is a "Missing widget mapping for <type>" error in the frontend server log.
@@ -87,22 +87,13 @@ const author = article._author?.[0]?.title;
 
 ## Shared Field Utilities — Backend (`backend/lib/`)
 
-- **`lib/link.js`** — Canonical link field set (`linkType`, `_linkPage`, `_linkFile`, `linkUrl`, `linkTarget`). Spread with `...linkConfig.link` into any schema needing a link. Do not copy these fields manually.
-- **`lib/area.js`** — Exports `basicConfig`, `fullConfig`, `fullConfigExpandedGroups`. Import the right one for each area's `widgets` option.
+- **`lib/area.js`** — Default-exports a shared `widgets` object (image, video, rich text) for an area's `widgets` option. The existing page types define their area widgets inline.
 
 ## Frontend Utilities
 
-**`frontend/src/utils/link.js`** — Canonical link resolution. Always use these; do not navigate `_linkPage[0]._url` manually.
-- `getLinkPath(link)` — resolves a link object (page, file, or custom URL) to a URL string.
-- `opensInNewTab(linkTarget)` — returns `true` if `linkTarget` is `['_blank']`.
+**`@apostrophecms/apostrophe-astro/helpers/universal`** — Helpers that work in both server and client code. Import from here, not from the deprecated helper files under `@apostrophecms/apostrophe-astro/lib/`. Server-only helpers such as `aposFetch` live in `helpers/server`. The one `lib/` import to keep is `lib/aposPageFetch.js` in `[...slug].astro`, an internal entry point with no replacement.
 
-```js
-import { getLinkPath, opensInNewTab } from '../../utils/link.js';
-const href = getLinkPath(widget);          // works for all three linkType values
-const newTab = opensInNewTab(widget.linkTarget);
-```
-
-**`@apostrophecms/apostrophe-astro/lib/attachment.js`** — Canonical image helpers. Use these for all image rendering; do not navigate `widget._image[0].attachment` manually. See `ImageWidget.astro` for the reference implementation.
+Image helpers — use these for all image rendering; do not navigate `widget._image[0].attachment` manually. See `ImageWidget.astro` for the reference implementation.
 - `getAttachmentUrl(imageObj)` — returns the image URL.
 - `getAttachmentSrcset(imageObj)` — returns a `srcset` string for responsive images.
 - `getFocalPoint(imageObj)` — returns an `object-position` CSS value (e.g. `"40% 60%"`).
@@ -111,7 +102,7 @@ const newTab = opensInNewTab(widget.linkTarget);
 ```js
 // Image helpers from the integration package — use these instead of navigating widget._image[0].attachment manually.
 import { getAttachmentUrl, getAttachmentSrcset, getFocalPoint, getWidth, getHeight }
-  from '@apostrophecms/apostrophe-astro/lib/attachment.js';
+  from '@apostrophecms/apostrophe-astro/helpers/universal';
 
 const imageObj = widget._image?.[0];
 const src = getAttachmentUrl(imageObj);
@@ -131,9 +122,7 @@ const { page } = Astro.props;
 
 ## i18n Key Convention
 
-The starter uses the `project:` namespace by default: `label: 'project:myField'`.
-Translations live in `backend/modules/@apostrophecms/i18n/i18n/project/`.
-Add keys there or introduce your own namespace with a matching folder under `i18n/`.
+The kit uses plain-string labels and ships no translation files. To localize labels, add an i18n namespace and use namespaced keys (`label: 'myNamespace:myField'`) — see the [localization docs](https://apostrophecms.com/docs/guide/localization/overview.html).
 
 ## Component Registries
 
@@ -146,9 +135,8 @@ Template keys must match the page type's backend module name exactly. Widget key
 
 ## Project Constraints
 
-- Do not change existing HTML class names — they are tied to existing SCSS.
-- Do not rename or alter field names in `backend/lib/link.js` — widget components and frontend utils depend on them.
-- `card-title-rt` and `card-content-rt` reuse `RichTextWidget` in the registry intentionally — they are inline rich-text variants.
+- Do not change existing HTML class names — they are tied to the CSS in `frontend/src/styles/`.
+- `nested-layout` and `nested-column` reuse the integration's `LayoutWidget` and `LayoutColumnWidget` in the registry intentionally.
 - Widget visual variants use the widget's `styles` property in `index.js`, not `select` schema fields for appearance.
 - Frontend is presentation-only — never change backend schemas from the frontend side.
 
