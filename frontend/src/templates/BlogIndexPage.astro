@@ -1,6 +1,6 @@
 ---
 import dayjs from 'dayjs';
-import setParameter from '@apostrophecms/apostrophe-astro/lib/aposSetQueryParameter.js';
+import { aposSetQueryParameter } from '@apostrophecms/apostrophe-astro/helpers/universal';
 
 const {
   page,
@@ -16,8 +16,8 @@ const pages = [];
 for (let i = 1; (i <= totalPages); i++) {
   pages.push({
     number: i,
-    current: page === currentPage,
-    url: setParameter(Astro.url, 'page', i)
+    current: i === currentPage,
+    url: aposSetQueryParameter(Astro.url, 'page', i)
   });
 }
 ---
@@ -36,10 +36,10 @@ for (let i = 1; (i <= totalPages); i++) {
     </h3>
   ))}
 
-  {pages.map(page => (
+  {pages.map(pagerLink => (
     <a
-      class={(page === currentPage) ? 'current' : ''} 
-      href={page.url}>{page.number}
+      class={pagerLink.current ? 'current' : ''}
+      href={pagerLink.url}>{pagerLink.number}
     </a>
   ))}
 </section>

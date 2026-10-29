@@ -11,17 +11,20 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@apostrophecms/apostrophe-astro": "^1.15.0",
-    "@astrojs/node": "^9.4.3",
-    "astro": "^5.13.7",
+    "@apostrophecms/apostrophe-astro": "^1.17.0",
+    "@astrojs/node": "^11.1.8",
+    "astro": "^7.4.0",
     "cross-env": "^10.1.0",
-    "dayjs": "^1.11.10",
+    "dayjs": "^1.11.23",
     "postcss-viewport-to-container-toggle": "^2.3.0",
-    "vite": "^7.1.5"
+    "vite": "^8.3.4"
   },
   "allowScripts": {
     "esbuild": true,
     "fsevents": true,
     "sharp": true
+  },
+  "engines": {
+    "node": ">=22.22.0"
   }
 }

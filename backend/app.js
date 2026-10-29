@@ -5,6 +5,8 @@ apostrophe({
   root: import.meta,
   shortName: 'starter-kit-astro',
   bundles: [ '@apostrophecms/blog' ],
+  // The public URL of the Astro frontend. Overridden by APOS_BASE_URL
+  baseUrl: 'http://localhost:4321',
   modules: {
     // Apostrophe module configuration
     // *******************************

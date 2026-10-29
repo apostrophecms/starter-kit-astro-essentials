@@ -107,50 +107,73 @@ Unlike typical headless setups where content editors work in separate admin pane
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js v22 or later
-- MongoDB v6.0 or later ([setup guide](https://docs.apostrophecms.org/guide/development-setup.html))
+- Node.js v22.22 or later (v24 recommended)
+- A database: SQLite (no server required), MongoDB, or PostgreSQL. Choose SQLite if you're unsure.
 - Windows users: [WSL2 required](https://docs.apostrophecms.org/cookbook/windows-development.html)
 
-### Get Running in Minutes
+### Installation
 
-The codebases located in the `backend` and `frontend` folders should be treated as interlinked but separate projects.
+Create a project with the guided installer:
 
-To simplify dependency management, this repository includes several root-level scripts for convenience. The `postinstall` script automatically installs dependencies for both the `frontend` and `backend` folders when you run `npm install` at the root.
+```bash
+npm create apostrophe@latest
+```
 
-1. **Clone the repo and install dependencies**
-   ```bash
-   git clone https://github.com/apostrophecms/starter-kit-astro-essentials.git
-   cd starter-kit-astro-essentials
-   npm install
-   ```
-2. **Set up environment variables**
-Both projects need an `APOS_EXTERNAL_FRONT_KEY` environment variable set to the same value for authentication. Open two terminals:
-   - **Mac/Linux users**: One terminal in `frontend` folder, one in `backend` folder
-   - **Windows users**: WSL terminal for `backend` folder, WSL or Windows terminal for `frontend` folder
+Answer the prompts as follows. The installer's default starting point is the Demo, so pick **Essentials** explicitly:
 
-   ```bash
-   # In both terminal windows
-   export APOS_EXTERNAL_FRONT_KEY=my-secret-key
-   ```
+1. **Project name** — anything; this becomes the project folder.
+2. **How would you like to build?** → **Apostrophe + Astro** (the default).
+3. **Choose a starting point** → **Essentials** (the default is Demo).
+4. **Choose a database** → **SQLite**, unless you already run MongoDB or PostgreSQL.
+5. **Create your admin account** — pick a username and password.
 
-   The `astro.config.mjs` file uses default values, but if running the backend on a different port and/or a different server, also set:
-   ```bash
-   export APOS_HOST=your-backend-url
-   ```
+The installer clones this repository, writes `.env` files for the backend and frontend, installs
+dependencies for both, and creates your admin account. Then:
 
-3. **Start development servers**
+```bash
+cd <your-project-name>
+npm run dev
+```
 
-   ```bash
-   # Terminal 1 - Backend (use WSL on Windows)
-   cd backend && npm run dev
+The root `npm run dev` starts the backend (port 3000) and the frontend (port 4321) together. Visit
+`http://localhost:4321` to see the site, and log in at `http://localhost:4321/login` with the admin
+account you just created. 🎉
 
-   # Terminal 2 - Frontend
-   cd frontend && npm run dev
-   ```
+To install without prompts, for example in CI, pass `--kit=apostrophe-astro-essentials`:
+
+```bash
+npm create apostrophe@latest -- --unattended --kit=apostrophe-astro-essentials \
+  --project-name=my-site --password=<admin-password> --telemetry=off
+```
+
+Run `npm create apostrophe@latest -- --help` for all flags.
 
 > **Note:** Astro is less stringent about project setup in development mode. Before deployment, run `npm run build` followed by `npm run preview` in the `frontend` folder to test production behavior. We don't recommend using the root `npm run serve-frontend` script during development - it's used for Apostrophe hosting.
 
-Visit `http://localhost:4321` and start building! 🎉
+### Working on this repository
+
+To contribute to the starter kit itself, fork this repository and clone it directly. This path starts with an empty database and no admin user.
+
+The codebases in the `backend` and `frontend` folders are interlinked but separate projects. Running `npm install` at the root installs dependencies for both.
+
+```bash
+git clone <your-fork-url>
+cd starter-kit-astro-essentials
+npm install
+cp backend/.env.example backend/.env
+cp frontend/.env.example frontend/.env
+# Edit backend/.env — set APOS_DB_URI unless MongoDB is running locally, e.g.
+# APOS_DB_URI=sqlite://./data/starter-kit-astro.db
+```
+
+Create an admin user, then start both servers:
+
+```bash
+cd backend && node app @apostrophecms/user:add admin admin && cd ..
+npm run dev
+```
+
+Both projects must share the same `APOS_EXTERNAL_FRONT_KEY`. The `.env.example` files and the `dev` scripts set it to `dev` for local development. If the backend runs on a different host or port, set `APOS_HOST` for the frontend as well.
 
 ---
 
@@ -238,7 +261,7 @@ import {
   getFocalPoint,
   getWidth,
   getHeight
-} from '../lib/attachments.js';
+} from '@apostrophecms/apostrophe-astro/helpers/universal';
 
 // Get first image from relationship
 const image = relationshipField._image[0];
@@ -375,7 +398,7 @@ Third-party hosting will typically require separate servers for the ApostropheCM
 #### Backend (ApostropheCMS) Deployment
 
 Your ApostropheCMS backend requires:
-- Node.js environment (v22 or later recommended)
+- Node.js environment (v22.22 or later)
 - MongoDB database
 - Asset storage solution (cloud storage like AWS S3)
 
@@ -389,6 +412,7 @@ Example deployment steps for a typical provider:
    NODE_ENV=production
    APOS_MONGODB_URI=YOUR_mongodb_connection_string
    APOS_EXTERNAL_FRONT_KEY=a_random_string
+   APOS_BASE_URL=https://your-frontend-domain.com
    APOS_S3_BUCKET=YOUR-bucket-name
    APOS_S3_SECRET=YOUR-s3-secret
    APOS_S3_KEY=YOUR-s3-key
