@@ -398,7 +398,7 @@ Third-party hosting will typically require separate servers for the ApostropheCM
 #### Backend (ApostropheCMS) Deployment
 
 Your ApostropheCMS backend requires:
-- Node.js environment (v22 or later recommended)
+- Node.js environment (v22.22 or later)
 - MongoDB database
 - Asset storage solution (cloud storage like AWS S3)
 
@@ -412,6 +412,7 @@ Example deployment steps for a typical provider:
    NODE_ENV=production
    APOS_MONGODB_URI=YOUR_mongodb_connection_string
    APOS_EXTERNAL_FRONT_KEY=a_random_string
+   APOS_BASE_URL=https://your-frontend-domain.com
    APOS_S3_BUCKET=YOUR-bucket-name
    APOS_S3_SECRET=YOUR-s3-secret
    APOS_S3_KEY=YOUR-s3-key

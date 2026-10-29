@@ -23,5 +23,8 @@
     "esbuild": true,
     "fsevents": true,
     "sharp": true
+  },
+  "engines": {
+    "node": ">=22.22.0"
   }
 }
