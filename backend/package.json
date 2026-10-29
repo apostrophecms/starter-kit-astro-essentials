@@ -42,15 +42,15 @@
   "author": "Apostrophe Technologies, Inc.",
   "license": "MIT",
   "dependencies": {
-    "@apostrophecms/blog": "^1.0.4",
-    "@apostrophecms/vite": "^1.1.0",
-    "apostrophe": "^4.23.0",
+    "@apostrophecms/blog": "^1.0.6",
+    "@apostrophecms/vite": "^1.2.0",
+    "apostrophe": "^4.34.0",
     "cross-env": "^10.1.0",
-    "dotenv": "^17.4.2"
+    "dotenv": "^18.0.8"
   },
   "devDependencies": {
-    "eslint-config-apostrophe": "^6.0.1",
-    "nodemon": "^3.0.1"
+    "eslint-config-apostrophe": "^6.1.0",
+    "nodemon": "^3.1.14"
   },
   "allowScripts": {
     "@parcel/watcher": true,
