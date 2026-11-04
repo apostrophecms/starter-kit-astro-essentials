@@ -429,6 +429,8 @@ Your Astro frontend can be deployed to any static hosting provider that supports
 - AWS Amplify
 There are a number of tutorials in the [Astro documentation](https://docs.astro.build/en/guides/deploy/#deployment-guides) to use as a starting point. The only modifications are the extra environment variable, `APOS_EXTERNAL_FRONT_KEY=a_random_string` set to the same string as your backend project, and to make sure that you are specifying the `frontend` folder as the root of the project.
 
+When the frontend runs as a Node server (`npm run serve`), also set `APOS_ALLOWED_DOMAINS` to the public hostnames of your site, matching the backend's `APOS_BASE_URL`. List several separated by commas, for example `www.example.com,example.com`. A bare hostname means `https`; for plain HTTP or a non-standard port, give the full origin, such as `http://staging.example.com:4321`. It defaults to `**.apos.dev`, which covers ApostropheCMS hosting. Astro reads it during `npm run build`, so set it wherever the build runs. Without it, Astro can't tell which domain it is serving: logout and media uploads fail with `403 Cross-site POST form submissions are forbidden` on some deployments, and `Astro.url` reports `localhost`. If a proxy sits in front of Astro, it must forward the `Host` and `X-Forwarded-Proto` headers.
+
 #### Netlify Deployment Example
 
 1. Log in to your [Netlify](https://www.netlify.com/) account.

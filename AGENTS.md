@@ -139,6 +139,7 @@ Template keys must match the page type's backend module name exactly. Widget key
 - `nested-layout` and `nested-column` reuse the integration's `LayoutWidget` and `LayoutColumnWidget` in the registry intentionally.
 - Widget visual variants use the widget's `styles` property in `index.js`, not `select` schema fields for appearance.
 - Frontend is presentation-only — never change backend schemas from the frontend side.
+- A production 403 "Cross-site POST form submissions are forbidden" (logout, uploads) means `APOS_ALLOWED_DOMAINS` was not set at build time. Set it to the site's public hostnames; do not disable `security.checkOrigin` or hard-code `security.allowedDomains` in `astro.config.mjs`.
 
 ## Architecture Guide
 
