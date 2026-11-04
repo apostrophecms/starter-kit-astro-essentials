@@ -7,8 +7,28 @@ import apostrophe from '@apostrophecms/apostrophe-astro';
 // process.env is used as a fallback for variables set via the CLI or shell.
 const env = loadEnv(process.env.NODE_ENV || 'development', process.cwd(), '');
 
+const output = 'server';
+
+// Public hostnames the site is served from, e.g. "www.example.com" (treated as
+// https) or a full origin such as "http://staging.example.com:4321". Astro only
+// trusts Host and X-Forwarded-* headers that match one of these, and otherwise
+// rejects logout and uploads as cross-site on some deployments. Defaults to
+// ApostropheCMS hosting. Read at build time, so set it where `npm run build` runs.
+const allowedDomains = (env.APOS_ALLOWED_DOMAINS || '**.apos.dev')
+  .split(',')
+  .map(entry => entry.trim())
+  .filter(Boolean)
+  .map(entry => {
+    const { protocol, hostname, port } = new URL(entry.includes('://') ? entry : `https://${entry}`);
+    return { protocol: protocol.replace(':', ''), hostname, ...(port && { port }) };
+  });
+
 export default defineConfig({
-  output: 'server',
+  output,
+  // Astro warns on every prerendered page if this is set for a static build
+  ...(output === 'server' && {
+    security: { allowedDomains }
+  }),
   server: {
     port: env.PORT ? parseInt(env.PORT) : 4321,
     // Required for some hosting, like Heroku
