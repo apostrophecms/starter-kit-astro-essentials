@@ -107,7 +107,7 @@ Unlike typical headless setups where content editors work in separate admin pane
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js v22.22 or later (v24 recommended)
+- Node.js v22.23.4 or later (v24 recommended)
 - A database: SQLite (no server required), MongoDB, or PostgreSQL. Choose SQLite if you're unsure.
 - Windows users: [WSL2 required](https://docs.apostrophecms.org/cookbook/windows-development.html)
 
@@ -398,7 +398,7 @@ Third-party hosting will typically require separate servers for the ApostropheCM
 #### Backend (ApostropheCMS) Deployment
 
 Your ApostropheCMS backend requires:
-- Node.js environment (v22.22 or later)
+- Node.js environment (v22.23.4 or later)
 - MongoDB database
 - Asset storage solution (cloud storage like AWS S3)
 
